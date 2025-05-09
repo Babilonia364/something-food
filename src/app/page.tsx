@@ -1,5 +1,6 @@
 import { Accordion } from "./components/Accordion";
 import { Button } from "./components/Button";
+import { Checkbox } from "./components/Checkbox";
 
 export default function Home() {
   const products = [
@@ -79,6 +80,21 @@ export default function Home() {
     }
   ];
 
+  const additionals = [
+    {
+      id:"additionals-shoyu",
+      label: "shoyu",
+    },
+    {
+      id:"additionals-gengibre",
+      label: "gengibre",
+    },
+    {
+      id:"additionals-wasabi",
+      label: "wasabi",
+    },
+  ];
+
   return (
     <div className="bg-surface-background">
       <h1 className="text-content-neutral-base text-xs">Texto</h1>
@@ -87,6 +103,7 @@ export default function Home() {
         items={products}
         collapsible
       />
+      <Checkbox items={additionals} />
     </div>
   );
 }
