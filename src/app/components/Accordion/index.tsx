@@ -13,15 +13,15 @@ import dolarsign from "@/app/assets/dolarsign.svg";
 const accordion = tv({
   slots: {
     base: "w-full",
-    item: "border-b border-gray-200 py-4",
+    item: "border-b border-gray-200 py-4 border-b-4 border-content-neutral-border",
     trigger: "group flex w-full items-center justify-between",
     content: "overflow-hidden data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown",
     productName: "text-base font-bold",
     productDescription: "text-xs mt-1",
     variantItem: "flex justify-between items-center py-2 px-4 rounded-lg",
     icon: "h-5 w-5 transition-transform duration-300 group-data-[state=open]:rotate-180",
-    price: 'text-content-primary',
-    offPrice: 'line-through text-content-neutral-weak',
+    price: 'text-sm text-content-primary',
+    offPrice: 'text-xs line-through text-content-neutral-weak',
   },
   variants: {
     colorScheme: {
@@ -48,6 +48,7 @@ type ProductVariant = {
   price: string;
   offPrice?: string;
   description?: string;
+  startingPrice?: boolean;
 };
 
 type ProductItem = {
@@ -108,8 +109,14 @@ export const Accordion = ({
                   <span className="text-xs text-content-neutral-weak">descriptons</span>
                 </div>
                 <div className="flex flex-col">
-                  <span className={`text-sm ${variant.offPrice ? styles.offPrice() : styles.price()}`}>{variant.price}</span>
-                  {variant.offPrice && <span className="text-sm text-content-success">{variant.offPrice}</span>}
+                  {variant.startingPrice && <span className="text-xs text-right text-content-neutral-weak">a partir de</span>}
+                  <span className={`text-right ${variant.offPrice ? styles.offPrice() : styles.price()}`}>{variant.price}</span>
+                  {variant.offPrice &&
+                    <div className="flex gap-1">
+                      <Image src={dolarsign} alt="" className="w-[12px]" />
+                      <span className="text-sm text-content-success">{variant.offPrice}</span>
+                    </div>
+                  }
                 </div>
               </div>
             ))}

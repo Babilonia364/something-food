@@ -14,13 +14,15 @@ export default function Home() {
           name: "Salmão",
           price: "R$ 14,90",
           offPrice: "R$ 12,90",
-          description: "Com cream cheese"
+          description: "Com cream cheese",
+          startingPrice: true
         },
         {
           id: "temaki-atum",
           name: "Atum",
           price: "R$ 14,90",
-          description: "Com cream quejo chedar"
+          description: "Com cream quejo chedar",
+          startingPrice: true
         },
         {
           id: "temaki-vegetariano",
@@ -45,7 +47,8 @@ export default function Home() {
           id: "uramaki-salmao-cebolinha",
           name: "Salmão Cebolinha",
           price: "R$ 24,90",
-          description: "10 unidades - salmão com cebolinha fresca"
+          description: "10 unidades - salmão com cebolinha fresca",
+          startingPrice: true
         },
         {
           id: "uramaki-atum",
