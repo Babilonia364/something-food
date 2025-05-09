@@ -7,11 +7,11 @@ module.exports = {
       'ts-jest',
       {
         tsconfig: '<rootDir>/tsconfig.jest.json', // Arquivo específico para testes
-        isolatedModules: true, // Importante para performance
       }
     ],
   },
   moduleNameMapper: {
+    '^.+\\.(svg)$': '<rootDir>/__mocks__/svgMock.js',
     '^@/(.*)$': '<rootDir>/src/$1', // Ajuste para seus aliases
   },
   transformIgnorePatterns: [

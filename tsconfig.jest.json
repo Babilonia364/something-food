@@ -4,7 +4,8 @@
     "jsx": "react-jsx",
     "module": "commonjs",
     "esModuleInterop": true,
-    "noEmit": true
+    "noEmit": true,
+    "isolatedModules": true,
   },
   "include": [
     "**/*.test.ts",

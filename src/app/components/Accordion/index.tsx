@@ -88,7 +88,7 @@ export const Accordion = ({
                 <h3 className={styles.productName()}>{product.name}</h3>
                 {
                   !!product.hasSomeOffProduct &&
-                  <Image src={dolarsign} alt="" className="w-[18px]" />
+                  <Image src={dolarsign} alt="discont announcment" className="w-[18px]" />
                 }
               </div>
               {product.description &&
@@ -96,7 +96,7 @@ export const Accordion = ({
               }
             </div>
           </div>
-          <Image src={chevron} className={styles.icon()} alt="" />
+          <Image src={chevron} className={styles.icon()} alt="chevron icon" />
         </RadixAccordionTrigger>
 
         {/* Content */}
@@ -113,7 +113,7 @@ export const Accordion = ({
                   <span className={`text-right ${variant.offPrice ? styles.offPrice() : styles.price()}`}>{variant.price}</span>
                   {variant.offPrice &&
                     <div className="flex gap-1">
-                      <Image src={dolarsign} alt="" className="w-[12px]" />
+                      <Image src={dolarsign} alt="price icon" className="w-[12px]" />
                       <span className="text-sm text-content-success">{variant.offPrice}</span>
                     </div>
                   }

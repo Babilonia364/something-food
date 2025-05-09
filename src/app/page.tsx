@@ -85,6 +85,7 @@ export default function Home() {
       <Button buttonType="ghost" buttonColor="success">Criança</Button>
       <Accordion
         items={products}
+        collapsible
       />
     </div>
   );
