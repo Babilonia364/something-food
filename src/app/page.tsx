@@ -1,10 +1,88 @@
+import { Accordion } from "./components/Accordion";
 import { Button } from "./components/Button";
 
 export default function Home() {
+  const products = [
+    {
+      id: "temaki",
+      name: "Temaki",
+      description: "Enrolado em forma de cone com alga nori e recheio variado",
+      hasSomeOffProduct: true,
+      variants: [
+        {
+          id: "temaki-salmao",
+          name: "Salmão",
+          price: "R$ 14,90",
+          offPrice: "R$ 12,90",
+          description: "Com cream cheese"
+        },
+        {
+          id: "temaki-atum",
+          name: "Atum",
+          price: "R$ 14,90",
+          description: "Com cream quejo chedar"
+        },
+        {
+          id: "temaki-vegetariano",
+          name: "Vegetariano",
+          price: "R$ 10,90",
+        },
+      ]
+    },
+    {
+      id: "uramaki",
+      name: "Uramaki",
+      description: "Enrolado com arroz por fora e recheio variado",
+      hasSomeOffProduct: true,
+      variants: [
+        {
+          id: "uramaki-salmao",
+          name: "Salmão",
+          price: "R$ 22,90",
+          description: "10 unidades - salmão fresco com cream cheese"
+        },
+        {
+          id: "uramaki-salmao-cebolinha",
+          name: "Salmão Cebolinha",
+          price: "R$ 24,90",
+          description: "10 unidades - salmão com cebolinha fresca"
+        },
+        {
+          id: "uramaki-atum",
+          name: "Atum",
+          price: "R$ 21,90",
+          description: "10 unidades - atum fresco com molho tarê"
+        },
+        {
+          id: "uramaki-pele-de-salmao",
+          name: "Pele de Salmão",
+          price: "R$ 19,90",
+          description: "10 unidades - pele de salmão grelhada com molho especial"
+        },
+        {
+          id: "uramaki-vegetariano",
+          name: "Vegetariano",
+          price: "R$ 18,90",
+          description: "10 unidades - pepino, manga e abacate"
+        },
+        {
+          id: "uramaki-california",
+          name: "California",
+          price: "R$ 20,90",
+          offPrice: "R$ 18,90",
+          description: "10 unidades - kani, manga e pepino"
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="bg-surface-background">
-      <h1 className="text-content-neutral-base">Texto</h1>
+      <h1 className="text-content-neutral-base text-xs">Texto</h1>
       <Button buttonType="ghost" buttonColor="success">Criança</Button>
+      <Accordion
+        items={products}
+      />
     </div>
   );
 }

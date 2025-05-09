@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Colors theme */
 @theme {
   /* Base colors are not meant to be used directly */
   /* They serve only to populate the contextual tokens */
@@ -37,4 +38,20 @@
   --color-surface-primary: var(--color-primary-500); /* primary-500 // brand */
   --color-surface-neutral-base: var(--color-gray-700); /* gray-700 // text-medium */
   --color-surface-neutral-weak: var(--color-gray-500); /* gray-500 // text-secondary */
+}
+
+/* Animations theme */
+@theme {
+  --animate-slideDown: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  --animate-slideUp: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
+
+  @keyframes slideDown {
+    0% { height: 0px };
+    100% { height: var(--radix-accordion-content-height) };
+  }
+
+  @keyframes slideUp {
+    from { height: var(--radix-accordion-content-height) };
+    to { height: 0px };
+  }
 }
