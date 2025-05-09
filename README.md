@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stuff
 
-## Getting Started
+## Color Scheme
 
-First, run the development server:
+primary-500 - // brand
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+secondary-400 - // brand
+secondary-600 - // brand
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+success-500 - // success
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+gray-100 - // content97
+gray-200 - // containers95
+gray-400 - // icons
+gray-500 - // text-secondary
+gray-700 - // text-medium
+gray-900 - // text-primary
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+white - // neutral-white
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+content-neutral-strong -> gray-900 // text-primary
+content-neutral-base -> gray-700 // text-medium
+content-neutral-weak -> gray-500 // text-secondary
+content-neutral-weakest -> gray-400 // icons
+content-neutral-border -> gray-200 // containers95
+content-primary -> primary-500 // brand
+content-secondary-strong -> secondary-600 // brand
+content-secondary-base -> secondary-400 // brand
+content-success -> success-500 // success
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+surface-background -> neutral-white
+surface-middleground -> gray-100 // content97
+surface-foreground -> gray-200 // content95
+surface-primary -> primary-500 // brand
+surface-neutral-base -> gray-700 // text-medium
+surface-neutral-weak -> gray-500 // text-secondary

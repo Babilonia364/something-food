@@ -1,26 +1,36 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-primary-500: rgba(123, 31, 162, 1); /* brand */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-secondary-400: rgba(0, 162, 150, 1); /* brand */
+  --color-secondary-600: rgba(2, 122, 122, 1); /* text */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --color-success-500: rgba(2, 161, 23, 1); /* success */
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --color-gray-100: rgba(245, 246, 249, 1); /* content97 */
+  --color-gray-200: rgba(238, 240, 245, 1); /* containers95 */
+  --color-gray-400: rgba(168, 173, 183, 1); /* icons */
+  --color-gray-500: rgba(109, 111, 115, 1); /* text-secondary */
+  --color-gray-700: rgba(57, 58, 60, 1); /* text-medium */
+  --color-gray-900: rgba(32, 35, 38, 1); /* text-primary */
+
+  --color-white: rgba(255, 255, 255, 1); /* neutral-white */
+
+  --color-content-neutral-strong: var(--color-gray-900); /* gray-900 // text-primary */
+  --color-content-neutral-base: var(--color-gray-700); /* gray-700 // text-medium */
+  --color-content-neutral-weak: var(--color-gray-500); /* gray-500 // text-secondary */
+  --color-content-neutral-weakest: var(--color-gray-400); /* gray-400 // icons */
+  --color-content-neutral-border: var(--color-gray-200); /* gray-200 // containers95 */
+  --color-content-primary: var(--color-primary-500); /* primary-500 // brand */
+  --color-content-secondary-strong: var(--color-secondary-600); /* secondary-600 // brand */
+  --color-content-secondary-base: var(--color-secondary-400); /* secondary-400 // brand */
+  --color-content-success: var(--color-success-500); /* success-500 // success */
+
+  --color-surface-background: var(--color-white); /* neutral-white */
+  --color-surface-middleground: var(--color-gray-100); /* gray-100 // content97 */
+  --color-surface-foreground: var(--color-gray-200); /* gray-200 // content95 */
+  --color-surface-primary: var(--color-primary-500); /* primary-500 // brand */
+  --color-surface-neutral-base: var(--color-gray-700); /* gray-700 // text-medium */
+  --color-surface-neutral-weak: var(--color-gray-500); /* gray-500 // text-secondary */
 }
