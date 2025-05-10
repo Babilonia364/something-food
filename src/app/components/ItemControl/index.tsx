@@ -1,8 +1,8 @@
 'use client';
-import { useActionState } from 'react';
+import { useActionState, useState } from 'react';
 import { tv } from 'tailwind-variants';
 import { shared } from "@/app/styles/shared-styles";
-import { updateQuantity } from '@/app/actions';
+import { Products, useControl } from './hooks';
 
 const itemControl = tv({
   slots: {
@@ -51,17 +51,7 @@ const itemControl = tv({
   }
 });
 
-type Product = {
-  id: string;
-  label: string;
-  price: string;
-}
-
-type Products = {
-  items: Product[];
-}
-
-export const ItemControl = ({ items }: Products) => {
+export const ItemControl = (itemsArray: Products) => {
   const {
     container,
     form,
@@ -74,17 +64,8 @@ export const ItemControl = ({ items }: Products) => {
     price
   } = itemControl();
 
-  const initialState = {
-    items: items.map(item => ({
-      id: item.id,
-      quantity: 0
-    }))
-  };
-  const [state, formAction] = useActionState(updateQuantity, initialState);
-
-  const getCurrentQuantity = (productId: string) => {
-    return state.items.find(item => item.id === productId)?.quantity || 0;
-  };
+  const { getCurrentQuantity, updateQuantity } = useControl(itemsArray);
+  const { items } = itemsArray;
 
   return (
     <div className={container()}>
@@ -94,13 +75,14 @@ export const ItemControl = ({ items }: Products) => {
           // const totalPrice = currentQuantity * parseFloat(item.price.replace('R$ ', '').replace(',', '.'));
 
           return (
-            <form className={form()} action={formAction} key={item.id}>
+            <div className={form()} key={item.id}>
               <div className={productGroup()}>
                 <div className={buttonGroup()}>
                   <button
                     type="submit"
                     name="action"
                     value="decrement"
+                    onClick={() => updateQuantity(item.id, -1)}
                     className={button({ variant: currentQuantity <= 0 ? "minus" : "plus" })}
                     disabled={currentQuantity <= 0}
                   >
@@ -111,6 +93,7 @@ export const ItemControl = ({ items }: Products) => {
                     type="submit"
                     name="action"
                     value="increment"
+                    onClick={() => updateQuantity(item.id, +1)}
                     className={button({ variant: "plus" })}
                   >
                     <span className={sign()}>+</span>
@@ -120,7 +103,7 @@ export const ItemControl = ({ items }: Products) => {
               </div>
               <input type="hidden" name="productId" value={item.id} />
               <label className={price()}>{item.price}</label>
-            </form>
+            </div>
           )
         })
       }
