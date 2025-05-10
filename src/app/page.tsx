@@ -84,10 +84,13 @@ export default function Home() {
     {
       id:"additionals-shoyu",
       label: "shoyu",
+      price: "R$ 4,00"
     },
     {
       id:"additionals-gengibre",
       label: "gengibre",
+      price: "R$ 2,50",
+      isAdditional: true,
     },
     {
       id:"additionals-wasabi",

@@ -8,9 +8,11 @@ import { tv } from "tailwind-variants";
 import Image from "next/image";
 import chevron from "@/app/assets/chevron.svg";
 import dolarsign from "@/app/assets/dolarsign.svg";
+import { shared } from "@/app/styles/shared-styles";
 
 // Defining styles to not overload the component
 const accordion = tv({
+  extend: shared,
   slots: {
     base: "w-full",
     item: "border-b border-gray-200 py-4 border-b-4 border-content-neutral-border",
@@ -18,9 +20,8 @@ const accordion = tv({
     content: "overflow-hidden data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown",
     productName: "text-base font-bold",
     productDescription: "text-xs mt-1",
-    variantItem: "flex justify-between items-center py-2 px-4 rounded-lg",
+    variantItem: "flex justify-between items-center py-2 rounded-lg",
     icon: "h-5 w-5 transition-transform duration-300 group-data-[state=open]:rotate-180",
-    price: 'text-sm text-content-primary',
     offPrice: 'text-xs line-through text-content-neutral-weak',
   },
   variants: {
@@ -101,7 +102,7 @@ export const Accordion = ({
 
         {/* Content */}
         <RadixAccordionContent className={styles.content()}>
-          <div className="pt-4 space-y-3">
+          <div className="pt-4 px-4 space-y-3">
             {product.variants.map((variant) => (
               <div key={variant.id} className={styles.variantItem()}>
                 <div className="flex flex-col">

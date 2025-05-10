@@ -6,13 +6,16 @@ import {
 import check from '@/app/assets/check.svg';
 import Image from 'next/image';
 import { tv } from 'tailwind-variants';
+import { shared } from '@/app/styles/shared-styles';
 
 // Defining variants to be easier to implement future features
 const checkbox = tv({
+  extend: shared,
   slots: {
-    base: 'flex gap-2 items-center',
+    base: 'flex justify-between px-4',
+    item: 'flex gap-2 items-center',
     checkbox: 'flex size-[16px] appearance-none items-center justify-center rounded-sm outline-none border-2',
-    label: 'text-sm text-content-neutral-weak'
+    label: 'text-sm text-content-neutral-weak',
   },
   variants: {
     state: {
@@ -29,6 +32,8 @@ const checkbox = tv({
 interface CheckboxProps {
   id: string;
   label: string;
+  price?: string;
+  isAdditional?: boolean;
 }
 
 type Products = {
@@ -36,20 +41,26 @@ type Products = {
 }
 
 export const Checkbox = ({ items }: Products) => {
-  const { base, checkbox: checkboxStyle, label } = checkbox();
+  const { base, item, checkbox: checkboxStyle, label, price } = checkbox();
 
   return (
     <>
-      {items.map((item) => (
-        <div className={base()} key={item.id}>
-          <RadixCheckbox className={checkboxStyle()}>
-            <RadixCheckboxIndicator>
-              <Image src={check} alt="check icon" />
-            </RadixCheckboxIndicator>
-          </RadixCheckbox>
-          <label className={label()}>
-            {item.label}
-          </label>
+      {items.map((product) => (
+        <div className={base()} key={product.id}>
+          <div className={item()}>
+            <RadixCheckbox className={checkboxStyle()}>
+              <RadixCheckboxIndicator>
+                <Image src={check} alt="check icon" />
+              </RadixCheckboxIndicator>
+            </RadixCheckbox>
+            <label className={label()}>
+              {product.label}
+            </label>
+          </div>
+          <div className='flex'>
+            {product.isAdditional && <span className={price()}>+</span>}
+            {product.price && <span className={price()}>{product.price}</span>}
+          </div>
         </div>
       ))}
     </>
