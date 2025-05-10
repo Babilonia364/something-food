@@ -28,7 +28,7 @@ const ticket = tv({
     subItemContainer: 'flex justify-between',
     subItemPrice: [
       'font-bold text-sm text-content-secondary-base',
-      "before:content-['•']"
+      "before:content-['+']"
     ],
   },
   variants: {
