@@ -3,7 +3,7 @@ import React, { ComponentType, ReactNode, SVGProps } from "react";
 
 // Define button variants
 const buttonVariants = tv({
-  base: "flex items-center justify-center gap-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2",
+  base: "flex items-center justify-center gap-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed py-2",
   variants: {
     buttonColor: {
       primary: "",
@@ -16,8 +16,9 @@ const buttonVariants = tv({
       "neutral-foreground": "",
     },
     buttonType: {
-      solid: "",
-      ghost: "bg-transparent hover:bg-opacity-10",
+      solid: "px-4",
+      ghost: "px-4 bg-transparent hover:bg-opacity-10",
+      icon: "bg-transparent hover:bg-opacity-10",
     },
   },
   compoundVariants: [
@@ -89,6 +90,13 @@ const buttonVariants = tv({
       buttonType: "ghost",
       class: "text-content-neutral-weak hover:bg-surface-neutral-weak/10 focus:ring-surface-neutral-weak",
     },
+
+    // Icon Variant
+    {
+      buttonColor: "success",
+      buttonType: "icon",
+      class: "text-content-secondary-base hover:bg-surface-neutral-base/10 focus:ring-surface-success",
+    }
   ],
   defaultVariants: {
     buttonColor: "primary",

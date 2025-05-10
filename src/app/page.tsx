@@ -149,6 +149,7 @@ export default function Home() {
     mainItemName: "Ceviche de salmão",
     mainItemQuantity: 1,
     mainItemPrice: "R$ 19,90",
+    observationMessage: "tirar a cebolinha",
     subItems: [
       {
         id: "subitem-tamanho",
