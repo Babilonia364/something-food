@@ -1,10 +1,13 @@
+'use client';
+import { useActionState } from 'react';
 import { tv } from 'tailwind-variants';
 import { shared } from "@/app/styles/shared-styles";
+import { updateQuantity } from '@/app/actions';
 
 const itemControl = tv({
   slots: {
-    form: 'flex flex-col gap-2',
-    container: 'flex justify-between items-center',
+    container: 'flex flex-col gap-2',
+    form: 'flex justify-between items-center',
     productGroup: 'flex gap-2',
     buttonGroup: 'flex gap-4',
     button: [
@@ -60,8 +63,8 @@ type Products = {
 
 export const ItemControl = ({ items }: Products) => {
   const {
-    form,
     container,
+    form,
     productGroup,
     buttonGroup,
     button,
@@ -71,27 +74,56 @@ export const ItemControl = ({ items }: Products) => {
     price
   } = itemControl();
 
+  const initialState = {
+    items: items.map(item => ({
+      id: item.id,
+      quantity: 0
+    }))
+  };
+  const [state, formAction] = useActionState(updateQuantity, initialState);
+
+  const getCurrentQuantity = (productId: string) => {
+    return state.items.find(item => item.id === productId)?.quantity || 0;
+  };
+
   return (
-    <form className={form()}>
+    <div className={container()}>
       {
-        items.map((item) => (
-          <div className={container()} key={item.id}>
-            <div className={productGroup()}>
-              <div className={buttonGroup()}>
-                <button className={button({ variant: "minus" })}>
-                  <span className={sign()}>-</span>
-                </button>
-                <label className={quantity()}>0</label>
-                <button className={button({ variant: "plus" })}>
-                  <span className={sign()}>+</span>
-                </button>
+        items.map((item) => {
+          const currentQuantity = getCurrentQuantity(item.id);
+          // const totalPrice = currentQuantity * parseFloat(item.price.replace('R$ ', '').replace(',', '.'));
+
+          return (
+            <form className={form()} action={formAction} key={item.id}>
+              <div className={productGroup()}>
+                <div className={buttonGroup()}>
+                  <button
+                    type="submit"
+                    name="action"
+                    value="decrement"
+                    className={button({ variant: currentQuantity <= 0 ? "minus" : "plus" })}
+                    disabled={currentQuantity <= 0}
+                  >
+                    <span className={sign()}>-</span>
+                  </button>
+                  <label className={quantity()}>{currentQuantity}</label>
+                  <button
+                    type="submit"
+                    name="action"
+                    value="increment"
+                    className={button({ variant: "plus" })}
+                  >
+                    <span className={sign()}>+</span>
+                  </button>
+                </div>
+                <label className={label()}>{item.label}</label>
               </div>
-              <label className={label()}>{item.label}</label>
-            </div>
-            <label className={price()}>{item.price}</label>
-          </div>
-        ))
+              <input type="hidden" name="productId" value={item.id} />
+              <label className={price()}>{item.price}</label>
+            </form>
+          )
+        })
       }
-    </form>
+    </div>
   );
 }
