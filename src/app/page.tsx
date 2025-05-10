@@ -1,6 +1,7 @@
 import { Accordion } from "./components/Accordion";
 import { Button } from "./components/Button";
 import { Checkbox } from "./components/Checkbox";
+import { RadioGroup } from "./components/RadioGroup";
 
 export default function Home() {
   const products = [
@@ -98,6 +99,31 @@ export default function Home() {
     },
   ];
 
+  const additionalsChooseOne = [
+    {
+      id: "additionalschoose-hashi",
+      label: "hashi",
+    },
+    {
+      id: "additionalschoose-garfo-e-faca",
+      label: "garfo e faca",
+      price: "R$ 1,00"
+    },
+    {
+      id: "additionalschoose-colher",
+      label: "colher",
+      price: "R$ 0,75",
+      isAdditional: true,
+    },
+    {
+      id: "additionalschoose-talher",
+      label: "talher",
+      price: "R$ 1,25",
+      isAdditional: true,
+      offPrice: "R$ 1,00",
+    },
+  ];
+
   return (
     <div className="bg-surface-background">
       <h1 className="text-content-neutral-base text-xs">Texto</h1>
@@ -107,6 +133,7 @@ export default function Home() {
         collapsible
       />
       <Checkbox items={additionals} />
+      <RadioGroup items={additionalsChooseOne} />
     </div>
   );
 }

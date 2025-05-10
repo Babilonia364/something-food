@@ -22,7 +22,10 @@ const accordion = tv({
     productDescription: "text-xs mt-1",
     variantItem: "flex justify-between items-center py-2 rounded-lg",
     icon: "h-5 w-5 transition-transform duration-300 group-data-[state=open]:rotate-180",
-    offPrice: 'text-xs line-through text-content-neutral-weak',
+    offPrice: [
+      shared().offPrice(),
+      "line-through"
+    ],
   },
   variants: {
     colorScheme: {

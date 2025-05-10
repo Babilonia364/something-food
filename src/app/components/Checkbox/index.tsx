@@ -15,7 +15,6 @@ const checkbox = tv({
     base: 'flex justify-between px-4',
     item: 'flex gap-2 items-center',
     checkbox: 'flex size-[16px] appearance-none items-center justify-center rounded-sm outline-none border-2',
-    label: 'text-sm text-content-neutral-weak',
   },
   variants: {
     state: {
@@ -48,19 +47,19 @@ export const Checkbox = ({ items }: Products) => {
       {items.map((product) => (
         <div className={base()} key={product.id}>
           <div className={item()}>
-            <RadixCheckbox className={checkboxStyle()}>
+            <RadixCheckbox className={checkboxStyle()} id={product.id}>
               <RadixCheckboxIndicator>
                 <Image src={check} alt="check icon" />
               </RadixCheckboxIndicator>
             </RadixCheckbox>
-            <label className={label()}>
+            <label className={label()} htmlFor={product.id}>
               {product.label}
             </label>
           </div>
-          <div className='flex'>
+          <label className='flex'>
             {product.isAdditional && <span className={price()}>+</span>}
             {product.price && <span className={price()}>{product.price}</span>}
-          </div>
+          </label>
         </div>
       ))}
     </>
