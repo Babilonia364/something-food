@@ -3,6 +3,7 @@ import { Button } from "./components/Button";
 import { Checkbox } from "./components/Checkbox";
 import { ItemControl } from "./components/ItemControl";
 import { RadioGroup } from "./components/RadioGroup";
+import { Ticket } from "./components/Ticket";
 
 export default function Home() {
   const products = [
@@ -84,18 +85,18 @@ export default function Home() {
 
   const additionals = [
     {
-      id:"additionals-shoyu",
+      id: "additionals-shoyu",
       label: "shoyu",
       price: "R$ 4,00"
     },
     {
-      id:"additionals-gengibre",
+      id: "additionals-gengibre",
       label: "gengibre",
       price: "R$ 2,50",
       isAdditional: true,
     },
     {
-      id:"additionals-wasabi",
+      id: "additionals-wasabi",
       label: "wasabi",
     },
   ];
@@ -143,6 +144,36 @@ export default function Home() {
     }
   ];
 
+  const ticketItems = {
+    mainItemId: "ticket-item-ceviche",
+    mainItemName: "Ceviche de salmão",
+    mainItemQuantity: 1,
+    mainItemPrice: "R$ 19,90",
+    subItems: [
+      {
+        id: "subitem-tamanho",
+        category: "tamanho",
+        items: [
+          {
+            id: "subitem-item-medio",
+            name: "medio",
+          }
+        ]
+      },
+      {
+        id: "subitem-vai-querer-bebida",
+        category: "vai querer bebida?",
+        items: [
+          {
+            id: "subitem-item-coca-cola",
+            name: "coca-cola",
+            price: "R$5,00",
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="bg-surface-background">
       <h1 className="text-content-neutral-base text-xs">Texto</h1>
@@ -154,6 +185,7 @@ export default function Home() {
       <Checkbox items={additionals} />
       <RadioGroup items={additionalsChooseOne} />
       <ItemControl items={additionalsChooseMTO} />
+      <Ticket items={ticketItems} />
     </div>
   );
 }

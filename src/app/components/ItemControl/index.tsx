@@ -1,5 +1,4 @@
 'use client';
-import { useActionState, useState } from 'react';
 import { tv } from 'tailwind-variants';
 import { shared } from "@/app/styles/shared-styles";
 import { Products, useControl } from './hooks';
@@ -10,14 +9,8 @@ const itemControl = tv({
     form: 'flex justify-between items-center',
     productGroup: 'flex gap-2',
     buttonGroup: 'flex gap-3',
-    button: [
-      'border-2 size-[24px] rounded-full',
-      'flex justify-center items-center',
-    ],
-    sign: [
-      'h-full',
-      'leading-none'
-    ],
+    button: shared().button(),
+    sign: shared().sign(),
     quantity: [
       'font-bold text-sm text-content-neutral-base',
       'h-full text-center w-[1rem] pt-[2px]'
@@ -33,19 +26,11 @@ const itemControl = tv({
   },
   variants: {
     variant: {
-      plus: {
-        button: [
-          'border-content-secondary-base',
-          'bg-surface-background hover:bg-surface-middleground',
-          'text-content-secondary-base'
-        ]
+      enabled: {
+        button: shared().button({ variant: "enabled" })
       },
-      minus: {
-        button: [
-          'border-content-neutral-border',
-          'bg-surface-foreground',
-          'text-content-neutral-weakest'
-        ]
+      disabled: {
+        button: shared().button({ variant: "disabled" })
       }
     }
   }
@@ -79,22 +64,22 @@ export const ItemControl = (itemsArray: Products) => {
               <div className={productGroup()}>
                 <div className={buttonGroup()}>
                   <button
-                    type="submit"
+                    type="button"
                     name="action"
                     value="decrement"
                     onClick={() => updateQuantity(item.id, -1)}
-                    className={button({ variant: currentQuantity <= 0 ? "minus" : "plus" })}
+                    className={button({ variant: currentQuantity <= 0 ? "disabled" : "enabled" })}
                     disabled={currentQuantity <= 0}
                   >
                     <span className={sign()}>-</span>
                   </button>
                   <label className={quantity()}>{currentQuantity}</label>
                   <button
-                    type="submit"
+                    type="button"
                     name="action"
                     value="increment"
                     onClick={() => updateQuantity(item.id, +1)}
-                    className={button({ variant: "plus" })}
+                    className={button({ variant: "enabled" })}
                   >
                     <span className={sign()}>+</span>
                   </button>
