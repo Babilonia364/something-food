@@ -1,6 +1,7 @@
 import { Accordion } from "./components/Accordion";
 import { Button } from "./components/Button";
 import { Checkbox } from "./components/Checkbox";
+import { ItemControl } from "./components/ItemControl";
 import { RadioGroup } from "./components/RadioGroup";
 
 export default function Home() {
@@ -124,6 +125,24 @@ export default function Home() {
     },
   ];
 
+  const additionalsChooseMTO = [
+    {
+      id: "additionalschoosemto-coca-cola",
+      label: "coca-cola",
+      price: "R$ 5,00"
+    },
+    {
+      id: "additionalschoosemto-água",
+      label: "água",
+      price: "R$ 4,00"
+    },
+    {
+      id: "additionalschoosemto-fanta-laranja",
+      label: "fanta laranja",
+      price: "R$ 5,00"
+    }
+  ];
+
   return (
     <div className="bg-surface-background">
       <h1 className="text-content-neutral-base text-xs">Texto</h1>
@@ -134,6 +153,7 @@ export default function Home() {
       />
       <Checkbox items={additionals} />
       <RadioGroup items={additionalsChooseOne} />
+      <ItemControl items={additionalsChooseMTO} />
     </div>
   );
 }
