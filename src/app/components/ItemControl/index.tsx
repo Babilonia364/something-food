@@ -9,7 +9,7 @@ const itemControl = tv({
     container: 'flex flex-col gap-2',
     form: 'flex justify-between items-center',
     productGroup: 'flex gap-2',
-    buttonGroup: 'flex gap-4',
+    buttonGroup: 'flex gap-3',
     button: [
       'border-2 size-[24px] rounded-full',
       'flex justify-center items-center',
@@ -20,7 +20,7 @@ const itemControl = tv({
     ],
     quantity: [
       'font-bold text-sm text-content-neutral-base',
-      'h-full pt-[2px]'
+      'h-full text-center w-[1rem] pt-[2px]'
     ],
     label: [
       'text-content-neutral-weak text-sm font-semibold',
