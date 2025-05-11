@@ -3,23 +3,68 @@ import { Button } from "../Button";
 import Image from "next/image";
 import share from "@/app/assets/share.svg";
 import heart from "@/app/assets/heart.svg";
+import bikePurple from "@/app/assets/bike-purple.svg";
+import star from "@/app/assets/star.svg";
+import { formatBRL } from "@/lib/format";
 
 const details = tv({
   slots: {
-    container: 'flex flex-col',
+    container: 'flex flex-col gap-2',
+    section: 'flex items-center px-2',
     shareIcon: 'min-w-[16px] h-auto',
     heartIcon: 'min-w-[20px] h-auto',
     moreInfo: 'text-xs font-bold text-content-secondary-base',
-    moreInfoChevron: 'text-xs font-bold text-content-secondary-base mt-[1px]',
+    chevron: 'text-xs font-bold text-content-secondary-base',
+    bikeIcon: 'w-[18px] h-auto',
+    deliveryPrice: 'font-bold text-sm text-content-primary',
+    separator: 'text-xs font-bold text-content-neutral-weakest',
+    grayText: 'text-xs font-bold text-content-neutral-weak',
+    greenText: 'text-xs font-bold text-content-success',
+    deliveryTaxText: 'text-xs font-bold text-content-secondary-strong',
+    starIcon: 'w-[12px] h-auto',
+  },
+  variants: {
+    variant: {
+      moreInfo: {
+        section: 'justify-between',
+        chevron: 'text-content-secondary-base mt-[1px]'
+      },
+      delivery: {
+        section: 'gap-2',
+        chevron: 'text-content-primary'
+      },
+      deliveryTax: {
+        section: [
+          'max-w-max',
+          'bg-surface-background-variant py-2',
+        ]
+      },
+      specs: {
+        section: 'gap-2',
+      },
+      minOrder: {
+        section: '',
+      },
+    }
   }
 });
 
-export const Details = () => {
+type Details = {
+  price: number,
+  estimatedTimeMin: string,
+  distance: string,
+  freeDeliveryPrice: number,
+  closeAt: string,
+  minOrder: number,
+  rating: number
+};
+
+export const Details = ({ item }: { item: Details }) => {
   const styles = details();
 
   return (
     <div className={styles.container()}>
-      <div className="flex justify-between items-center px-2">
+      <div className={styles.section({ variant: 'moreInfo' })}>
         <div className="flex gap-5">
           <Button
             buttonType="icon"
@@ -35,9 +80,31 @@ export const Details = () => {
           </Button>
         </div>
         <div className="flex items-center gap-1">
-          <span className={styles.moreInfo()}>mais infos</span>
-          <span className={styles.moreInfoChevron()} >{'>'}</span>
+          <p className={styles.moreInfo()}>mais infos</p>
+          <p className={styles.chevron({ variant: 'moreInfo' })} >{'>'}</p>
         </div>
+      </div>
+      <div className={styles.section({ variant: 'delivery' })}>
+        <Image src={bikePurple} alt="delivery has a price" className={styles.bikeIcon()} />
+        <p className={styles.deliveryPrice()}>{formatBRL(item.price)}</p>
+        <span className={styles.chevron({ variant: 'delivery' })} >{'>'}</span>
+        <span className={styles.separator()}>•</span>
+        <p className={styles.grayText()}>hoje, {item.estimatedTimeMin}</p>
+        <span className={styles.separator()}>•</span>
+        <p className={styles.grayText()}>{item.distance}</p>
+      </div>
+      <div className={styles.section({ variant: 'deliveryTax' })}>
+        <p className={styles.deliveryTaxText()}>entrega grátis acima de {formatBRL(item.freeDeliveryPrice)}</p>
+      </div>
+      <div className={styles.section({ variant: 'specs' })}>
+        <Image src={star} alt="rating of restaurant" className={styles.starIcon()} />
+        <p className={styles.grayText()}>{item.rating} de 5</p>
+        <span className={styles.chevron({ variant: 'moreInfo' })}>{'>'}</span>
+        <span className={styles.separator()}>•</span>
+        <p className={styles.greenText()}>fecha às {item.closeAt}</p>
+      </div>
+      <div className={styles.section({ variant: 'minOrder' })}>
+        <p className={styles.grayText()}>pedido mínimo: {formatBRL(item.minOrder)}</p>
       </div>
     </div>
   );

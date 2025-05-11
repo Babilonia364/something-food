@@ -47,6 +47,16 @@ export default async function Home() {
     }
   });
 
+  const details = {
+    price: 4.99,
+    estimatedTimeMin: "30-40 min",
+    distance: "5.2km",
+    freeDeliveryPrice: 35,
+    closeAt: "23:00",
+    minOrder: 15,
+    rating: 4.8
+  }
+
   const products = [
     {
       id: "temaki",
@@ -229,7 +239,7 @@ export default async function Home() {
         <h3 className={title({ variant: "disabled" })}>fechados</h3>
         <ClientCard items={closed} variant="disabled" />
         <LogoCard name={open[0].name} logo={open[0].logo} />
-        <Details />
+        <Details item={details} />
         <LogoCard name={closed[0].name} logo={closed[0].logo} variant="checkout" />
         <Button buttonType="ghost" buttonColor="success">Criança</Button>
         <Accordion

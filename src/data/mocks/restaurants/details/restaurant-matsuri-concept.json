@@ -1,0 +1,86 @@
+{
+  "id": "restaurant-matsuri-concept",
+  "price": 4.99,
+  "estimatedTimeMin": "30-40 min",
+  "distance": "5.2km",
+  "freeDeliveryPrice": 35,
+  "closeAt": "23:00",
+  "minOrder": 15,
+  "rating": 4.8,
+  "products": [
+    {
+      "id": "temaki",
+      "name": "Temaki",
+      "description": "Enrolado em forma de cone com alga nori e recheio variado",
+      "hasSomeOffProduct": true,
+      "variants": [
+        {
+          "id": "temaki-salmao",
+          "name": "Salmão",
+          "price": "R$ 14,90",
+          "offPrice": "R$ 12,90",
+          "description": "Com cream cheese",
+          "startingPrice": true
+        },
+        {
+          "id": "temaki-atum",
+          "name": "Atum",
+          "price": "R$ 14,90",
+          "description": "Com cream quejo chedar",
+          "startingPrice": true
+        },
+        {
+          "id": "temaki-vegetariano",
+          "name": "Vegetariano",
+          "price": "R$ 10,90"
+        }
+      ]
+    },
+    {
+      "id": "uramaki",
+      "name": "Uramaki",
+      "description": "Enrolado com arroz por fora e recheio variado",
+      "hasSomeOffProduct": true,
+      "variants": [
+        {
+          "id": "uramaki-salmao",
+          "name": "Salmão",
+          "price": "R$ 22,90",
+          "description": "10 unidades - salmão fresco com cream cheese"
+        },
+        {
+          "id": "uramaki-salmao-cebolinha",
+          "name": "Salmão Cebolinha",
+          "price": "R$ 24,90",
+          "description": "10 unidades - salmão com cebolinha fresca",
+          "startingPrice": true
+        },
+        {
+          "id": "uramaki-atum",
+          "name": "Atum",
+          "price": "R$ 21,90",
+          "description": "10 unidades - atum fresco com molho tarê"
+        },
+        {
+          "id": "uramaki-pele-de-salmao",
+          "name": "Pele de Salmão",
+          "price": "R$ 19,90",
+          "description": "10 unidades - pele de salmão grelhada com molho especial"
+        },
+        {
+          "id": "uramaki-vegetariano",
+          "name": "Vegetariano",
+          "price": "R$ 18,90",
+          "description": "10 unidades - pepino, manga e abacate"
+        },
+        {
+          "id": "uramaki-california",
+          "name": "California",
+          "price": "R$ 20,90",
+          "offPrice": "R$ 18,90",
+          "description": "10 unidades - kani, manga e pepino"
+        }
+      ]
+    }
+  ]
+}

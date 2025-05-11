@@ -3,7 +3,7 @@ import { tv } from "tailwind-variants";
 import bikeTeal from "@/app/assets/bike-teal.svg";
 import star from "@/app/assets/star.svg";
 import biker from "@/app/assets/biker.svg";
-import { formatBRLNoSpace, formatFloatToString } from "@/lib/format";
+import { formatBRLNoSpace } from "@/lib/format";
 import { Client } from "@/data/types/restaurants";
 
 const clientCard = tv({
@@ -81,7 +81,7 @@ export const ClientCard = ({ items, variant = "enabled" }: Clients) => {
                     </>
                 }
                 <Image src={star} alt="restaurant rating" className={styles.iconStar()} />
-                <span className={styles.ratingText()}>{formatFloatToString(item.rating)}</span>
+                <span className={styles.ratingText()}>{item.rating}</span>
               </div>
             </div>
           </div>

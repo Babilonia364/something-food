@@ -19,6 +19,7 @@
 
   --color-success-500: rgba(2, 161, 23, 1); /* success */
 
+  --color-gray-50: rgba(242, 250, 250, 1); /* teal50 */
   --color-gray-100: rgba(245, 246, 249, 1); /* content97 */
   --color-gray-200: rgba(238, 240, 245, 1); /* containers95 */
   --color-gray-400: rgba(168, 173, 183, 1); /* icons */
@@ -41,6 +42,7 @@
   
   /* Surfaces variables are for backgrounds */
   --color-surface-background: var(--color-white); /* neutral-white */
+  --color-surface-background-variant: var(--color-gray-50); /* teal50 */
   --color-surface-middleground: var(--color-gray-100); /* gray-100 // content97 */
   --color-surface-foreground: var(--color-gray-200); /* gray-200 // content95 */
   --color-surface-primary: var(--color-primary-500); /* primary-500 // brand */
