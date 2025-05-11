@@ -6,6 +6,7 @@ import heart from "@/app/assets/heart.svg";
 import bikePurple from "@/app/assets/bike-purple.svg";
 import star from "@/app/assets/star.svg";
 import { formatBRL } from "@/lib/format";
+import { DetailsType } from "@/data/types/details";
 
 const details = tv({
   slots: {
@@ -49,17 +50,7 @@ const details = tv({
   }
 });
 
-type Details = {
-  price: number,
-  estimatedTimeMin: string,
-  distance: string,
-  freeDeliveryPrice: number,
-  closeAt: string,
-  minOrder: number,
-  rating: number
-};
-
-export const Details = ({ item }: { item: Details }) => {
+export const Details = ({ item }: { item: DetailsType }) => {
   const styles = details();
 
   return (

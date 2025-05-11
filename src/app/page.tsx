@@ -1,5 +1,4 @@
 import { getRestaurants } from "@/lib/api/mock/restaurants";
-import { Accordion } from "./components/Accordion";
 import { Button } from "./components/Button";
 import { Checkbox } from "./components/Checkbox";
 import { ClientCard } from "./components/ClientCard";
@@ -12,7 +11,6 @@ import { tv } from "tailwind-variants";
 import Image from "next/image";
 import bannerImage from "@/app/assets/banner.jpg";
 import { LogoCard } from "./components/LogoCard";
-import { Details } from "./components/Details";
 
 const home = tv({
   slots: {
@@ -46,93 +44,6 @@ export default async function Home() {
       closed.push(restaurant)
     }
   });
-
-  const details = {
-    price: 4.99,
-    estimatedTimeMin: "30-40 min",
-    distance: "5.2km",
-    freeDeliveryPrice: 35,
-    closeAt: "23:00",
-    minOrder: 15,
-    rating: 4.8
-  }
-
-  const products = [
-    {
-      id: "temaki",
-      name: "Temaki",
-      description: "Enrolado em forma de cone com alga nori e recheio variado",
-      hasSomeOffProduct: true,
-      variants: [
-        {
-          id: "temaki-salmao",
-          name: "Salmão",
-          price: "R$ 14,90",
-          offPrice: "R$ 12,90",
-          description: "Com cream cheese",
-          startingPrice: true
-        },
-        {
-          id: "temaki-atum",
-          name: "Atum",
-          price: "R$ 14,90",
-          description: "Com cream quejo chedar",
-          startingPrice: true
-        },
-        {
-          id: "temaki-vegetariano",
-          name: "Vegetariano",
-          price: "R$ 10,90",
-        },
-      ]
-    },
-    {
-      id: "uramaki",
-      name: "Uramaki",
-      description: "Enrolado com arroz por fora e recheio variado",
-      hasSomeOffProduct: true,
-      variants: [
-        {
-          id: "uramaki-salmao",
-          name: "Salmão",
-          price: "R$ 22,90",
-          description: "10 unidades - salmão fresco com cream cheese"
-        },
-        {
-          id: "uramaki-salmao-cebolinha",
-          name: "Salmão Cebolinha",
-          price: "R$ 24,90",
-          description: "10 unidades - salmão com cebolinha fresca",
-          startingPrice: true
-        },
-        {
-          id: "uramaki-atum",
-          name: "Atum",
-          price: "R$ 21,90",
-          description: "10 unidades - atum fresco com molho tarê"
-        },
-        {
-          id: "uramaki-pele-de-salmao",
-          name: "Pele de Salmão",
-          price: "R$ 19,90",
-          description: "10 unidades - pele de salmão grelhada com molho especial"
-        },
-        {
-          id: "uramaki-vegetariano",
-          name: "Vegetariano",
-          price: "R$ 18,90",
-          description: "10 unidades - pepino, manga e abacate"
-        },
-        {
-          id: "uramaki-california",
-          name: "California",
-          price: "R$ 20,90",
-          offPrice: "R$ 18,90",
-          description: "10 unidades - kani, manga e pepino"
-        }
-      ]
-    }
-  ];
 
   const additionals = [
     {
@@ -238,14 +149,8 @@ export default async function Home() {
         <ClientCard items={open} />
         <h3 className={title({ variant: "disabled" })}>fechados</h3>
         <ClientCard items={closed} variant="disabled" />
-        <LogoCard name={open[0].name} logo={open[0].logo} />
-        <Details item={details} />
         <LogoCard name={closed[0].name} logo={closed[0].logo} variant="checkout" />
         <Button buttonType="ghost" buttonColor="success">Criança</Button>
-        <Accordion
-          items={products}
-          collapsible
-        />
         <Checkbox items={additionals} />
         <RadioGroup items={additionalsChooseOne} />
         <ItemControl items={additionalsChooseMTO} />
