@@ -19,22 +19,22 @@
         {
           "id": "temaki-salmao",
           "name": "Salmão",
-          "price": "R$ 14,90",
-          "offPrice": "R$ 12,90",
+          "price": 14.90,
+          "offPrice": 12.90,
           "description": "Com cream cheese",
           "startingPrice": true
         },
         {
           "id": "temaki-atum",
           "name": "Atum",
-          "price": "R$ 14,90",
+          "price": 14.90,
           "description": "Com cream quejo chedar",
           "startingPrice": true
         },
         {
           "id": "temaki-vegetariano",
           "name": "Vegetariano",
-          "price": "R$ 10,90"
+          "price": 10.90
         }
       ]
     },
@@ -47,39 +47,39 @@
         {
           "id": "uramaki-salmao",
           "name": "Salmão",
-          "price": "R$ 22,90",
+          "price": 22.90,
           "description": "10 unidades - salmão fresco com cream cheese"
         },
         {
           "id": "uramaki-salmao-cebolinha",
           "name": "Salmão Cebolinha",
-          "price": "R$ 24,90",
+          "price": 24.90,
           "description": "10 unidades - salmão com cebolinha fresca",
           "startingPrice": true
         },
         {
           "id": "uramaki-atum",
           "name": "Atum",
-          "price": "R$ 21,90",
+          "price": 21.90,
           "description": "10 unidades - atum fresco com molho tarê"
         },
         {
           "id": "uramaki-pele-de-salmao",
           "name": "Pele de Salmão",
-          "price": "R$ 19,90",
+          "price": 19.90,
           "description": "10 unidades - pele de salmão grelhada com molho especial"
         },
         {
           "id": "uramaki-vegetariano",
           "name": "Vegetariano",
-          "price": "R$ 18,90",
+          "price": 18.90,
           "description": "10 unidades - pepino, manga e abacate"
         },
         {
           "id": "uramaki-california",
           "name": "California",
-          "price": "R$ 20,90",
-          "offPrice": "R$ 18,90",
+          "price": 20.90,
+          "offPrice": 18.90,
           "description": "10 unidades - kani, manga e pepino"
         }
       ]

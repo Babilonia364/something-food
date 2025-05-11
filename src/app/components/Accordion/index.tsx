@@ -9,13 +9,15 @@ import Image from "next/image";
 import chevron from "@/app/assets/chevron.svg";
 import dolarsign from "@/app/assets/dolarsign.svg";
 import { shared } from "@/app/styles/shared-styles";
+import { formatBRL } from "@/lib/format";
+import { ProductItem } from "@/data/types/details";
 
 // Defining styles to not overload the component
 const accordion = tv({
   extend: shared,
   slots: {
     container: "w-full",
-    item: "border-b border-gray-200 py-4 border-b-4 border-content-neutral-border",
+    item: "border-b border-gray-200 py-4 px-4 border-b-4 border-content-neutral-border",
     trigger: "group flex w-full items-center justify-between",
     content: "overflow-hidden data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown",
     productName: "text-base font-bold",
@@ -45,24 +47,6 @@ const accordion = tv({
     colorScheme: "neutral"
   }
 });
-
-type ProductVariant = {
-  id: string;
-  name: string;
-  price: string;
-  offPrice?: string;
-  description?: string;
-  startingPrice?: boolean;
-};
-
-type ProductItem = {
-  id: string;
-  name: string;
-  hasSomeOffProduct?: boolean;
-  description?: string;
-  icon?: React.ReactNode;
-  variants: ProductVariant[];
-};
 
 type AccordionProps = {
   items: ProductItem[];
@@ -110,15 +94,15 @@ export const Accordion = ({
               <div key={variant.id} className={styles.variantItem()}>
                 <div className="flex flex-col">
                   <span className="text-sm text-content-neutral-strong">{variant.name}</span>
-                  <span className="text-xs text-content-neutral-weak">descriptons</span>
+                  <span className="text-xs text-content-neutral-weak">{variant.description}</span>
                 </div>
                 <div className="flex flex-col">
                   {variant.startingPrice && <span className="text-xs text-right text-content-neutral-weak">a partir de</span>}
-                  <span className={`text-right ${variant.offPrice ? styles.offPrice() : styles.price()}`}>{variant.price}</span>
+                  <span className={`text-right ${variant.offPrice ? styles.offPrice() : styles.price()}`}>{formatBRL(variant.price)}</span>
                   {variant.offPrice &&
                     <div className="flex gap-1">
                       <Image src={dolarsign} alt="price icon" className="w-[12px]" />
-                      <span className="text-sm text-content-success">{variant.offPrice}</span>
+                      <span className="text-sm text-content-success">{formatBRL(variant.offPrice)}</span>
                     </div>
                   }
                 </div>

@@ -1,8 +1,8 @@
 type ProductVariant = {
   id: string;
   name: string;
-  price: string;
-  offPrice?: string;
+  price: number;
+  offPrice?: number;
   description?: string;
   startingPrice?: boolean;
 };

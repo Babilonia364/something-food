@@ -31,20 +31,20 @@ const details = tv({
         chevron: 'text-content-secondary-base mt-[1px]'
       },
       delivery: {
-        section: 'gap-2',
+        section: 'gap-2 px-1',
         chevron: 'text-content-primary'
       },
       deliveryTax: {
         section: [
           'max-w-max',
-          'bg-surface-background-variant py-2',
+          'bg-surface-background-variant py-2 mx-0.5',
         ]
       },
       specs: {
-        section: 'gap-2',
+        section: 'gap-2 px-1',
       },
       minOrder: {
-        section: '',
+        section: 'px-0.5',
       },
     }
   }
@@ -95,7 +95,7 @@ export const Details = ({ item }: { item: DetailsType }) => {
         <p className={styles.greenText()}>fecha às {item.closeAt}</p>
       </div>
       <div className={styles.section({ variant: 'minOrder' })}>
-        <p className={styles.grayText()}>pedido mínimo: {formatBRL(item.minOrder)}</p>
+        <p className={styles.grayText({ variant: 'minOrder' })}>pedido mínimo: {formatBRL(item.minOrder)}</p>
       </div>
     </div>
   );

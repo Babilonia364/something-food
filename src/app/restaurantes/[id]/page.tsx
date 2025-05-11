@@ -17,9 +17,11 @@ export default async function RestaurantPage({ params }: { params: IRestaurantPa
   if (Object.keys(details).length === 0) return <div>Empty state</div>
 
   return (
-    <div className="flex flex-col">
-      <LogoCard name={details.name} logo={details.logo} />
-      <Details item={details} />
+    <div className="flex flex-col py-6">
+      <div className="flex flex-col gap-3 px-4">
+        <LogoCard name={details.name} logo={details.logo} />
+        <Details item={details} />
+      </div>
       <Accordion
         items={products}
         collapsible
