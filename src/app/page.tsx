@@ -11,6 +11,7 @@ import { isRestaurantOpen } from "@/lib/utils/time";
 import { tv } from "tailwind-variants";
 import Image from "next/image";
 import bannerImage from "@/app/assets/banner.jpg";
+import { LogoCard } from "./components/LogoCard";
 
 const home = tv({
   slots: {
@@ -226,6 +227,8 @@ export default async function Home() {
         <ClientCard items={open} />
         <h3 className={title({ variant: "disabled" })}>fechados</h3>
         <ClientCard items={closed} variant="disabled" />
+        <LogoCard name={open[0].name} logo={open[0].logo} />
+        <LogoCard name={closed[0].name} logo={closed[0].logo} variant="checkout" />
         <Button buttonType="ghost" buttonColor="success">Criança</Button>
         <Accordion
           items={products}
