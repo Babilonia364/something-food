@@ -4,13 +4,49 @@
     "logo": "https://play-lh.googleusercontent.com/LRl6A3uZGvY_u5lAUyNjKmQHgKVgoBahK39L0UpCbaswaQnpCKA7ABpPcraE3kNvKQ=w240-h480-rw",
     "name": "Matsuri Concept",
     "deliveryPrice": 0,
-    "rating": 4.8
+    "rating": 4.8,
+    "openingHours": {
+      "is24h": false,
+      "opensAt": "11:00",
+      "closesAt": "23:00",
+      "timezone": "America/Sao_Paulo"
+    }
   },
   {
     "id": "restaurant-tortoise-pizza",
     "logo": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/a5735e216292729.677d983c552ca.png",
     "name": "Breaking Tortoise PIZZA",
     "deliveryPrice": 7,
-    "rating": 5
+    "rating": 5,
+    "openingHours": {
+      "is24h": true,
+      "timezone": "America/Sao_Paulo"
+    }
+  },
+  {
+    "id": "restaurant-the-angry-chicken",
+    "logo": "https://1000logos.net/wp-content/uploads/2018/08/Restaurant-with-chicken-logo.jpg",
+    "name": "A Galinha Braba",
+    "deliveryPrice": 5,
+    "rating": 4.9,
+    "openingHours": {
+      "is24h": false,
+      "opensAt": "08:00",
+      "closesAt": "21:00",
+      "timezone": "America/Sao_Paulo"
+    }
+  },
+  {
+    "id": "restaurant-bring-it",
+    "logo": "https://i.pinimg.com/736x/51/47/a9/5147a977e7e810e2e4b874cc0df35b2f.jpg",
+    "name": "Bring It Comidas",
+    "deliveryPrice": 5,
+    "rating": 4.8,
+    "openingHours": {
+      "is24h": false,
+      "opensAt": "01:00",
+      "closesAt": "16:00",
+      "timezone": "America/Sao_Paulo"
+    }
   }
 ]

@@ -4,6 +4,7 @@ import bikeTeal from "@/app/assets/bike-teal.svg";
 import star from "@/app/assets/star.svg";
 import biker from "@/app/assets/biker.svg";
 import { formatBRLNoSpace, formatFloatToString } from "@/lib/format";
+import { Client } from "@/data/types/restaurants";
 
 const clientCard = tv({
   slots: {
@@ -29,22 +30,25 @@ const clientCard = tv({
     deliveryPrice: 'text-sm font-bold text-content-primary mr-1',
     iconStar: 'w-[18px] h-auto',
     ratingText: 'text-sm font-bold text-content-neutral-weak',
-  }
+  },
+  variants: {
+    variant: {
+      enabled: {
+        logo: '',
+      },
+      disabled: {
+        logo: 'opacity-40',
+      }
+    }
+  },
 });
 
-type Client = {
-  id: string,
-  logo: string,
-  name: string,
-  deliveryPrice: number,
-  rating: number,
-};
-
 type Clients = {
-  items: Client[]
+  items: Client[],
+  variant?: "enabled" | "disabled"
 };
 
-export const ClientCard = ({ items }: Clients) => {
+export const ClientCard = ({ items, variant = "enabled" }: Clients) => {
   const styles = clientCard();
 
   return (
@@ -58,7 +62,7 @@ export const ClientCard = ({ items }: Clients) => {
                 alt="Restaurant name"
                 width={72}
                 height={72}
-                className={styles.logo()}
+                className={styles.logo({ variant })}
               />
             </div>
             <div className={styles.attributes()}>
