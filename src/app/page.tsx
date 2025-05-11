@@ -1,3 +1,4 @@
+import { getRestaurants } from "@/lib/api/mock/restaurants";
 import { Accordion } from "./components/Accordion";
 import { Button } from "./components/Button";
 import { Checkbox } from "./components/Checkbox";
@@ -6,23 +7,8 @@ import { ItemControl } from "./components/ItemControl";
 import { RadioGroup } from "./components/RadioGroup";
 import { Ticket } from "./components/Ticket";
 
-export default function Home() {
-  const restaurantsList = [
-    {
-      id: "restaurant-matsuri-concept",
-      logo: "https://play-lh.googleusercontent.com/LRl6A3uZGvY_u5lAUyNjKmQHgKVgoBahK39L0UpCbaswaQnpCKA7ABpPcraE3kNvKQ=w240-h480-rw",
-      name: "Matsuri Concept",
-      deliveryPrice: 0,
-      rating: 4.8
-    },
-    {
-      id: "restaurant-tortoise-pizza",
-      logo: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/a5735e216292729.677d983c552ca.png",
-      name: "Breaking Tortoise PIZZA",
-      deliveryPrice: 7,
-      rating: 5
-    },
-  ]
+export default async function Home() {
+  const restaurantsList = await getRestaurants();
 
   const products = [
     {
