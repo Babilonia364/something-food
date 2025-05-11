@@ -12,7 +12,7 @@ import { shared } from '@/app/styles/shared-styles';
 const checkbox = tv({
   extend: shared,
   slots: {
-    base: 'flex justify-between px-4',
+    base: 'flex justify-between',
     item: 'flex gap-2 items-center',
     checkbox: 'flex size-[16px] appearance-none items-center justify-center rounded-sm outline-none border-2',
   },
