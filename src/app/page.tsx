@@ -1,6 +1,7 @@
 import { Accordion } from "./components/Accordion";
 import { Button } from "./components/Button";
 import { Checkbox } from "./components/Checkbox";
+import { ClientCard } from "./components/ClientCard";
 import { ItemControl } from "./components/ItemControl";
 import { RadioGroup } from "./components/RadioGroup";
 import { Ticket } from "./components/Ticket";
@@ -178,6 +179,7 @@ export default function Home() {
   return (
     <div className="bg-surface-background">
       <h1 className="text-content-neutral-base text-xs">Texto</h1>
+      <ClientCard />
       <Button buttonType="ghost" buttonColor="success">Criança</Button>
       <Accordion
         items={products}
