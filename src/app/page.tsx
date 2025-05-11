@@ -7,6 +7,23 @@ import { RadioGroup } from "./components/RadioGroup";
 import { Ticket } from "./components/Ticket";
 
 export default function Home() {
+  const restaurantsList = [
+    {
+      id: "restaurant-matsuri-concept",
+      logo: "https://play-lh.googleusercontent.com/LRl6A3uZGvY_u5lAUyNjKmQHgKVgoBahK39L0UpCbaswaQnpCKA7ABpPcraE3kNvKQ=w240-h480-rw",
+      name: "Matsuri Concept",
+      deliveryPrice: 0,
+      rating: 4.8
+    },
+    {
+      id: "restaurant-tortoise-pizza",
+      logo: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/a5735e216292729.677d983c552ca.png",
+      name: "Breaking Tortoise PIZZA",
+      deliveryPrice: 7,
+      rating: 5
+    },
+  ]
+
   const products = [
     {
       id: "temaki",
@@ -179,7 +196,7 @@ export default function Home() {
   return (
     <div className="bg-surface-background">
       <h1 className="text-content-neutral-base text-xs">Texto</h1>
-      <ClientCard />
+      <ClientCard items={restaurantsList} />
       <Button buttonType="ghost" buttonColor="success">Criança</Button>
       <Accordion
         items={products}
