@@ -18,6 +18,8 @@ export default async function ProductPage({ params }: { params: IProductPage }) 
   if (Object.keys(items).length === 0) return <div>Empty state</div>
 
   return (
-    <ProductClient items={items} />
+    <div className="overflow-x-hidden">
+      <ProductClient items={items} />
+    </div>
   );
 }
