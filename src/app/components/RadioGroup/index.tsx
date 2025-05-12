@@ -61,19 +61,24 @@ export const RadioGroup = ({ items, categoryName, categoryId, mainCategory }: IA
   const { selectedItems, setSelectedItems, mainItem, setMainItem, replaceFirstProduct } = useProductContext();
 
   const OnValueChange = (value: string) => {
-    const [label, id] = value.split('|');
+    const [label, id, price, offPrice] = value.split('|');
+    const itemOffPrice: number = offPrice !== undefined ? parseFloat(offPrice) : 0;
+    const itemPrice: number = price !== undefined ? parseFloat(price) : 0;
+    const finalPrice: number = itemOffPrice > 0 ? itemOffPrice : itemPrice;
+
     if(mainCategory) {
-      const auxSelected = mainItem || {id: "", name: "",  category: "", quantity: 0};
+      const auxSelected = mainItem || {id: "", name: "",  category: "", quantity: 0, price: 0};
       
       auxSelected.id = id;
       auxSelected.name = label;
       auxSelected.quantity = 0;
       auxSelected.category = categoryName;
+      auxSelected.price = finalPrice;
       
       setMainItem({ ...auxSelected });
     }else {
       const auxSelected = selectedItems || {};
-      replaceFirstProduct(auxSelected, categoryId, categoryName, {id: id, name: label, quantity: 1});
+      replaceFirstProduct(auxSelected, categoryId, categoryName, {id: id, name: label, quantity: 1, price: finalPrice || 0});
       setSelectedItems([...auxSelected]);
     }
   }
@@ -87,7 +92,7 @@ export const RadioGroup = ({ items, categoryName, categoryId, mainCategory }: IA
           <div className={itemContainer()} key={item.id}>
             <div className={radioGroupStyle()}>
               <RadixRadioGroupItem
-                value={`${item.label}|${item.id}`}
+                value={`${item.label}|${item.id}|${item?.price}|${item?.offPrice}`}
                 className={radioItem()}
                 id={item.id}
               >

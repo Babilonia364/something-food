@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 type ChoosenProduct = {
   id: string,
   name: string,
-  quantity: number
+  quantity: number,
+  price: number
 }
 
 type ChoosenProducts = {
@@ -19,6 +20,7 @@ type MainProduct = {
   id: string,
   category: string,
   name: string,
+  price: number,
   quantity: number
 }
 
@@ -27,10 +29,11 @@ interface IProductContext {
   setSelectedItems: Dispatch<SetStateAction<ChoosenProducts[]>>,
   mainItem: MainProduct,
   setMainItem: Dispatch<SetStateAction<MainProduct>>,
+  total: number,
   addProductToCategory: any,
   removeProductFromCategory: any,
   updateProductInCategory: any,
-  replaceFirstProduct: any,
+  replaceFirstProduct: any
 }
 
 const ProductContext = createContext<IProductContext | undefined>(undefined);
@@ -38,16 +41,18 @@ const ProductContext = createContext<IProductContext | undefined>(undefined);
 export function ProductProvider({ children }: { children: React.ReactNode }) {
   const [selectedItems, setSelectedItems] = useState<ChoosenProducts[]>([]);
   const [mainItem, setMainItem] = useState<MainProduct>({} as MainProduct);
+  const [total, setTotal] = useState<number>(0);
   const addProductToCategory = (
     auxSelected: {
       id: string;
       category: string;
-      products: { id: string; name: string; quantity: number }[];
+      products: { id: string; name: string; quantity: number, price: number }[];
     }[],
     categoryId: string,
     categoryName: string,
     itemId: string,
-    itemName: string
+    itemName: string,
+    itemPrice: number
   ) => {
     const existingCategory = auxSelected.find(cat => cat.id === categoryId);
 
@@ -58,7 +63,8 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
         existingCategory.products.push({
           id: itemId,
           name: itemName,
-          quantity: 1
+          quantity: 1,
+          price: itemPrice
         });
       }
     } else {
@@ -69,7 +75,8 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
           {
             id: itemId,
             name: itemName,
-            quantity: 1
+            quantity: 1,
+            price: itemPrice
           }
         ]
       });
@@ -109,13 +116,14 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
     auxSelected: {
       id: string;
       category: string;
-      products: { id: string; name: string; quantity: number }[];
+      products: { id: string; name: string; quantity: number, price: number }[];
     }[],
     categoryId: string,
     categoryName: string,
     itemId: string,
     itemName: string,
     newQuantity: number,
+    itemPrice: number
   ) => {
     const existingCategoryIndex = auxSelected.findIndex(cat => cat.id === categoryId);
 
@@ -129,12 +137,14 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
           id: itemId,
           name: itemName,
           quantity: newQuantity,
+          price: itemPrice
         };
       } else {
         auxSelected[existingCategoryIndex].products.push({
           id: itemId,
           name: itemName,
           quantity: newQuantity,
+          price: itemPrice
         });
       }
     } else {
@@ -146,6 +156,7 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
             id: itemId,
             name: itemName,
             quantity: newQuantity,
+            price: itemPrice
           },
         ],
       });
@@ -160,7 +171,7 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
     }[],
     categoryId: string,
     categoryName: string,
-    newProduct: { id: string; name: string; quantity: number }
+    newProduct: { id: string; name: string; quantity: number, price: number }
   ) => {
     const categoryIndex = auxSelected.findIndex(cat => cat.id === categoryId);
 
@@ -186,12 +197,30 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  useEffect(() => {
+    const updateTotal = () => {
+      let total = 0;
+
+      if (!isNaN(mainItem.price)) total += (mainItem.quantity * mainItem.price);
+      selectedItems.forEach((product) => {
+        product.products.forEach((item) => {
+          if (!isNaN(item.price)) total += (item.quantity * item.price);
+        });
+      });
+
+      setTotal(total);
+    }
+
+    updateTotal();
+  }, [selectedItems, mainItem]);
+
   return (
     <ProductContext.Provider value={{
       selectedItems,
       setSelectedItems,
       mainItem,
       setMainItem,
+      total,
       addProductToCategory,
       removeProductFromCategory,
       updateProductInCategory,

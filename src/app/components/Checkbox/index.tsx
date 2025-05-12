@@ -51,7 +51,7 @@ export const Checkbox = ({ items, limit, categoryName, categoryId }: IAdditional
   const [checkedObj, setCheckedObj] = useState<CheckboxState>();
   const { selectedItems, setSelectedItems, addProductToCategory, removeProductFromCategory } = useProductContext();
 
-  const onCheckedChange = (checked: string | boolean, itemId: string, itemName: string) => {
+  const onCheckedChange = (checked: string | boolean, itemId: string, itemName: string, itemPrice?: number) => {
     const auxArray = { ...checkedObj };
     const auxSelected = selectedItems || [];
 
@@ -65,7 +65,7 @@ export const Checkbox = ({ items, limit, categoryName, categoryId }: IAdditional
     let aux = auxArray.length as number;
     if (checked === true) {
       aux += 1
-      addProductToCategory(auxSelected, categoryId, categoryName, itemId, itemName);
+      addProductToCategory(auxSelected, categoryId, categoryName, itemId, itemName, itemPrice || 0);
     } else if (checked === false) {
       removeProductFromCategory(auxSelected, categoryId, itemId)
       aux -= 1;
@@ -94,7 +94,7 @@ export const Checkbox = ({ items, limit, categoryName, categoryId }: IAdditional
               className={checkboxStyle({ state: isDisabled(product.id) ? "disabled" : "default" })}
               id={product.id}
               disabled={isDisabled(product.id)}
-              onCheckedChange={(checked) => onCheckedChange(checked, product.id, product.label)}
+              onCheckedChange={(checked) => onCheckedChange(checked, product.id, product.label, product.price)}
             >
               <RadixCheckboxIndicator>
                 <Image src={check} alt="check icon" />

@@ -9,7 +9,7 @@ import minus from "@/app/assets/minus.svg";
 
 export const MainDish = () => {
 
-  const { mainItem, setMainItem } = useProductContext();
+  const { mainItem, setMainItem, total } = useProductContext();
 
   const OnClick = () => {
     const auxMainItem = { ...mainItem };
@@ -36,7 +36,7 @@ export const MainDish = () => {
         <p className="font-bold text-base text-content-neutral-strong">quantos</p>
         <div className="flex gap-1.5">
           <p className="text-sm font-semibold text-content-neutral-weak">total</p>
-          <p className="text-sm font-bold text-content-neutral-base">{formatBRL(29.90)}</p>
+          <p className="text-sm font-bold text-content-neutral-base">{formatBRL(total)}</p>
         </div>
       </div>
       <div>

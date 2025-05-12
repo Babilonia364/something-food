@@ -58,7 +58,6 @@ export const ItemControl = (itemsArray: Products) => {
       {
         items.map((item) => {
           const currentQuantity = getCurrentQuantity(item.id);
-          // const totalPrice = currentQuantity * parseFloat(item.price.replace('R$ ', '').replace(',', '.'));
 
           return (
             <div className={form()} key={item.id}>
@@ -68,7 +67,7 @@ export const ItemControl = (itemsArray: Products) => {
                     type="button"
                     name="action"
                     value="decrement"
-                    onClick={() => updateQuantity(item.id, item.label, -1)}
+                    onClick={() => updateQuantity(item.id, item.label, -1, item.price)}
                     className={button({ variant: currentQuantity <= 0 ? "disabled" : "enabled" })}
                     disabled={currentQuantity <= 0}
                   >
@@ -79,7 +78,7 @@ export const ItemControl = (itemsArray: Products) => {
                     type="button"
                     name="action"
                     value="increment"
-                    onClick={() => updateQuantity(item.id, item.label, +1)}
+                    onClick={() => updateQuantity(item.id, item.label, +1, item.price)}
                     className={button({ variant: "enabled" })}
                   >
                     <span className={sign()}>+</span>

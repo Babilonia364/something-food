@@ -17,7 +17,7 @@ type ProductQuantity = {
 type UseControlReturn = {
   productsTotal: { items: ProductQuantity[] };
   getCurrentQuantity: (productId: string) => number;
-  updateQuantity: (productId: string, itemName: string, newQuantity: number) => void;
+  updateQuantity: (productId: string, itemName: string, newQuantity: number, itemPrice?: number) => void;
 };
 
 export function useControl({ items, categoryName, categoryId }: Products): UseControlReturn {
@@ -35,10 +35,10 @@ export function useControl({ items, categoryName, categoryId }: Products): UseCo
     return productsTotal.items.find(item => item.id === productId)?.quantity || 0;
   };
 
-  const updateQuantity = (productId: string, itemName: string, newQuantity: number) => {
+  const updateQuantity = (productId: string, itemName: string, newQuantity: number, itemPrice?: number) => {
     const auxSelected = selectedItems || [];
 
-    updateProductInCategory(auxSelected, categoryId, categoryName, productId, itemName, getCurrentQuantity(productId) + newQuantity);
+    updateProductInCategory(auxSelected, categoryId, categoryName, productId, itemName, getCurrentQuantity(productId) + newQuantity, itemPrice || 0);
 
     setProductsTotal(prev => ({
       items: prev.items.map(item =>
