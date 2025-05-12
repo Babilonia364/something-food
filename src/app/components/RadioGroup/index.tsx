@@ -9,6 +9,7 @@ import { tv } from "tailwind-variants";
 import dolarsign from "@/app/assets/dolarsign.svg";
 import { Additional } from "@/data/types/products";
 import { formatBRL } from "@/lib/format";
+import { useProductContext } from "@/app/context/ProductContext";
 
 const radioGroup = tv({
   extend: shared,
@@ -39,9 +40,12 @@ const radioGroup = tv({
 
 interface IAdditionals {
   items: Additional[];
+  categoryName: string,
+  categoryId: string,
+  mainCategory?: boolean,
 };
 
-export const RadioGroup = ({ items }: IAdditionals) => {
+export const RadioGroup = ({ items, categoryName, categoryId, mainCategory }: IAdditionals) => {
   const {
     container,
     itemContainer,
@@ -54,30 +58,49 @@ export const RadioGroup = ({ items }: IAdditionals) => {
     price,
     offPrice
   } = radioGroup();
+  const { selectedItems, setSelectedItems, mainItem, setMainItem, replaceFirstProduct } = useProductContext();
+
+  const OnValueChange = (value: string) => {
+    const [label, id] = value.split('|');
+    if(mainCategory) {
+      const auxSelected = mainItem || {id: "", name: "",  category: "", quantity: 0};
+      
+      auxSelected.id = id;
+      auxSelected.name = label;
+      auxSelected.quantity = 1;
+      auxSelected.category = categoryName;
+      
+      setMainItem({ ...auxSelected });
+    }else {
+      const auxSelected = selectedItems || {};
+      replaceFirstProduct(auxSelected, categoryId, categoryName, {id: id, name: label, quantity: 1});
+      setSelectedItems([...auxSelected]);
+    }
+  }
 
   return (
-    <RadixRadioGroup className={container()} aria-label="View density">
+    <RadixRadioGroup className={container()} aria-label="View density" onValueChange={OnValueChange}>
       {items.map((item) => {
         const hasDiscount = !!item.offPrice;
-        
+
         return (
           <div className={itemContainer()} key={item.id}>
             <div className={radioGroupStyle()}>
-              <RadixRadioGroupItem 
-                value={item.id} 
-                className={radioItem()} 
+              <RadixRadioGroupItem
+                value={`${item.label}|${item.id}`}
+                className={radioItem()}
                 id={item.id}
               >
                 <RadixRadioGroupIndicator className={radioIndicator()} />
               </RadixRadioGroupItem>
-              
+
               {hasDiscount && <Image src={dolarsign} alt="off price offer" className={discountBadge()} />}
-              
+
               <label className={label()} htmlFor={item.id}>
                 {item.label}
               </label>
             </div>
-            
+
             <div>
               {hasDiscount && item.price && (
                 <>
@@ -85,7 +108,7 @@ export const RadioGroup = ({ items }: IAdditionals) => {
                   <span className={offPrice()}> por </span>
                 </>
               )}
-              
+
               <span className={price({
                 isAdditional: item.isAdditional
               })}>

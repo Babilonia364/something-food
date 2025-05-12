@@ -8,6 +8,7 @@
       "hasLimit": true,
       "category": "qual o tamanho?",
       "limit": 1,
+      "mainCategory": true,
       "additionals": [
         {
           "id": "additionals-medio",

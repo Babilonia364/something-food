@@ -12,6 +12,7 @@ export type Categories = {
   hasLimit?: boolean,
   category: string,
   limit: number,
+  mainCategory?: boolean,
   additionals: Additional[]
 }
 

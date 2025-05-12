@@ -11,7 +11,6 @@ import { shared } from '@/app/styles/shared-styles';
 import { Additional } from '@/data/types/products';
 import { formatBRL } from '@/lib/format';
 import { useProductContext } from '@/app/context/ProductContext';
-import { useCheckbox } from './hooks';
 
 // Defining variants to be easier to implement future features
 const checkbox = tv({
@@ -50,8 +49,7 @@ interface IAdditionals {
 export const Checkbox = ({ items, limit, categoryName, categoryId }: IAdditionals) => {
   const { base, item, checkbox: checkboxStyle, label, price } = checkbox();
   const [checkedObj, setCheckedObj] = useState<CheckboxState>();
-  const { selectedItems, setSelectedItems } = useProductContext();
-  const { addProductToCategory } = useCheckbox();
+  const { selectedItems, setSelectedItems, addProductToCategory, removeProductFromCategory } = useProductContext();
 
   const onCheckedChange = (checked: string | boolean, itemId: string, itemName: string) => {
     const auxArray = { ...checkedObj };
@@ -67,11 +65,12 @@ export const Checkbox = ({ items, limit, categoryName, categoryId }: IAdditional
     let aux = auxArray.length as number;
     if (checked === true) {
       aux += 1
+      addProductToCategory(auxSelected, categoryId, categoryName, itemId, itemName);
     } else if (checked === false) {
+      removeProductFromCategory(auxSelected, categoryId, itemId)
       aux -= 1;
     }
 
-    addProductToCategory(auxSelected, categoryId, categoryName, itemId, itemName);
 
     auxArray.length = aux;
     setCheckedObj(auxArray);

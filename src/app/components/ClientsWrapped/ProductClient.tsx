@@ -58,7 +58,7 @@ export default function ProductClient({ items }: IProductClient) {
                 {item.hasLimit && item.limit && item.limit > 1 ? (
                   <Checkbox items={item.additionals} limit={item.limit} categoryName={item.category} categoryId={item.id} />
                 ) : item.hasLimit && item.limit && item.limit === 1 ? (
-                  <RadioGroup items={item.additionals} />
+                  <RadioGroup items={item.additionals} categoryName={item.category} categoryId={item.id} mainCategory={item.mainCategory} />
                 ) : (
                   <ItemControl items={item.additionals} />
                 )}
