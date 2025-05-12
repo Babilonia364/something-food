@@ -5,6 +5,7 @@ import star from "@/app/assets/star.svg";
 import biker from "@/app/assets/biker.svg";
 import { formatBRLNoSpace } from "@/lib/format";
 import { Client } from "@/data/types/restaurants";
+import Link from "next/link";
 
 const clientCard = tv({
   slots: {
@@ -51,40 +52,51 @@ type Clients = {
 export const ClientCard = ({ items, variant = "enabled" }: Clients) => {
   const styles = clientCard();
 
+  const BlockRoute = (route: string) => {
+    if(variant === "disabled") return "";
+    if(route === "/restaurantes/restaurant-matsuri-concept") return route;
+    else return "";
+  }
+
   return (
     <div className="flex flex-col gap-4">
       {
         items.map((item) => (
-          <div className="flex" key={item.id}>
-            <div className={styles.logoContainer()}>
-              <Image
-                src={item.logo}
-                alt="Restaurant name"
-                width={72}
-                height={72}
-                className={styles.logo({ variant })}
-              />
-            </div>
-            <div className={styles.attributes()}>
-              <h2 className={styles.title()}>{item.name}</h2>
-              <div className="flex gap-1 items-center">
-                {
-                  item.deliveryPrice <= 0 ?
-                    <>
-                      <Image src={bikeTeal} alt="free delivery" className={styles.iconBike()} />
-                      <span className={styles.deliveryText()}>grátis</span>
-                    </>
-                    :
-                    <>
-                      <Image src={biker} alt="delivery price" className={styles.iconBiker()} />
-                      <span className={styles.deliveryPrice()}>{formatBRLNoSpace(item.deliveryPrice)}</span>
-                    </>
-                }
-                <Image src={star} alt="restaurant rating" className={styles.iconStar()} />
-                <span className={styles.ratingText()}>{item.rating}</span>
+          <Link
+            href={BlockRoute(`/restaurantes/${item.id}`)}
+            key={item.id}
+          >
+            <div className="flex">
+              <div className={styles.logoContainer()}>
+                <Image
+                  src={item.logo}
+                  alt="Restaurant name"
+                  width={72}
+                  height={72}
+                  className={styles.logo({ variant })}
+                />
+              </div>
+              <div className={styles.attributes()}>
+                <h2 className={styles.title()}>{item.name}</h2>
+                <div className="flex gap-1 items-center">
+                  {
+                    item.deliveryPrice <= 0 ?
+                      <>
+                        <Image src={bikeTeal} alt="free delivery" className={styles.iconBike()} />
+                        <span className={styles.deliveryText()}>grátis</span>
+                      </>
+                      :
+                      <>
+                        <Image src={biker} alt="delivery price" className={styles.iconBiker()} />
+                        <span className={styles.deliveryPrice()}>{formatBRLNoSpace(item.deliveryPrice)}</span>
+                      </>
+                  }
+                  <Image src={star} alt="restaurant rating" className={styles.iconStar()} />
+                  <span className={styles.ratingText()}>{item.rating}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))
       }
     </div>
