@@ -1,0 +1,23 @@
+{
+  "id": "temaki-salmao",
+  "minPrice": 12.90,
+  "categories": [
+    {
+      "isMandatory": true,
+      "hasLimit": true,
+      "category": "qual o tamanho?",
+      "limit": 1,
+      "additionals": [
+        {
+          "label": "médio",
+          "price": 16.90,
+          "offPrice": 12.90
+        },
+        {
+          "label": "grande",
+          "price": 28.90
+        }
+      ]
+    }
+  ]
+}
