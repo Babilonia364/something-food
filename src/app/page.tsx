@@ -44,49 +44,6 @@ export default async function Home() {
     }
   });
 
-  const additionalsChooseOne = [
-    {
-      id: "additionalschoose-hashi",
-      label: "hashi",
-    },
-    {
-      id: "additionalschoose-garfo-e-faca",
-      label: "garfo e faca",
-      price: 1.00
-    },
-    {
-      id: "additionalschoose-colher",
-      label: "colher",
-      price: 0.75,
-      isAdditional: true,
-    },
-    {
-      id: "additionalschoose-talher",
-      label: "talher",
-      price: 1.25,
-      isAdditional: true,
-      offPrice: 1.00,
-    },
-  ];
-
-  const additionalsChooseMTO = [
-    {
-      id: "additionalschoosemto-coca-cola",
-      label: "coca-cola",
-      price: "R$ 5,00"
-    },
-    {
-      id: "additionalschoosemto-água",
-      label: "água",
-      price: "R$ 4,00"
-    },
-    {
-      id: "additionalschoosemto-fanta-laranja",
-      label: "fanta laranja",
-      price: "R$ 5,00"
-    }
-  ];
-
   const ticketItems = {
     mainItemId: "ticket-item-ceviche",
     mainItemName: "Ceviche de salmão",
@@ -132,8 +89,6 @@ export default async function Home() {
         <ClientCard items={closed} variant="disabled" />
         <LogoCard name={closed[0].name} logo={closed[0].logo} variant="checkout" />
         <Button buttonType="ghost" buttonColor="success">Criança</Button>
-        <RadioGroup items={additionalsChooseOne} />
-        <ItemControl items={additionalsChooseMTO} />
         <Ticket items={ticketItems} />
       </div>
     </>
