@@ -3,30 +3,7 @@
 
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { setCookie, getCookie } from 'cookies-next';
-
-type ChoosenProduct = {
-  id: string,
-  name: string,
-  quantity: number,
-  price: number,
-  offPrice?: number,
-}
-
-type ChoosenProducts = {
-  id: string,
-  category: string,
-  products: ChoosenProduct[]
-}
-
-type MainProduct = {
-  id: string,
-  category: string,
-  name: string,
-  price: number,
-  realPrice: number,
-  offPrice: number,
-  quantity: number
-}
+import { ChoosenProducts, MainProduct, RestaurantData } from "@/data/types/context";
 
 interface IProductContext {
   selectedItems: ChoosenProducts[],
@@ -34,6 +11,7 @@ interface IProductContext {
   mainItem: MainProduct,
   setMainItem: Dispatch<SetStateAction<MainProduct>>,
   total: number,
+  setRestaurantData: Dispatch<SetStateAction<RestaurantData>>,
   addProductToCategory: any,
   removeProductFromCategory: any,
   updateProductInCategory: any,
@@ -51,6 +29,11 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
   const [mainItem, setMainItem] = useState<MainProduct>(() => {
     const cookieData = getCookie('mainItem');
     return cookieData ? JSON.parse(cookieData.toString()) : {} as MainProduct;
+  });
+
+  const [restaurantData, setRestaurantData] = useState<RestaurantData>(() => {
+    const cookieData = getCookie('restaurantData');
+    return cookieData ? JSON.parse(cookieData.toString()) : {} as RestaurantData;
   });
 
   const [total, setTotal] = useState<number>(() => {
@@ -212,7 +195,7 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const updateCookies = (items: ChoosenProducts[], main: MainProduct, ttl: number) => {
+  const updateCookies = (items: ChoosenProducts[], main: MainProduct, ttl: number, restaurant: RestaurantData) => {
     setCookie('selectedItems', JSON.stringify(items), {
       path: '/',
       maxAge: 60 * 60 * 24 * 7, // 1 semana
@@ -222,6 +205,10 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
       maxAge: 60 * 60 * 24 * 7,
     });
     setCookie('total', ttl.toString(), {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    });
+    setCookie('restaurantData', JSON.stringify(restaurant), {
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
     });
@@ -245,8 +232,8 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
   }, [selectedItems, mainItem]);
 
   useEffect(() => {
-    updateCookies(selectedItems, mainItem, total);
-  }, [selectedItems, mainItem, total]);
+    updateCookies(selectedItems, mainItem, total, restaurantData);
+  }, [selectedItems, mainItem, total, restaurantData]);
 
   return (
     <ProductContext.Provider value={{
@@ -255,6 +242,7 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
       mainItem,
       setMainItem,
       total,
+      setRestaurantData,
       addProductToCategory,
       removeProductFromCategory,
       updateProductInCategory,

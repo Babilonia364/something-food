@@ -18,6 +18,11 @@ export type Categories = {
 
 export type Product = {
   id: string,
+  logo: string,
+  restaurantName: string,
   minPrice: number,
+  image: string,
+  name: string,
+  description: string,
   categories: Categories[]
 }

@@ -1,5 +1,4 @@
 import { getRestaurants } from "@/lib/api/mock/restaurants";
-import { Button } from "./components/Button";
 import { ClientCard } from "./components/ClientCard";
 import { Ticket } from "./components/Ticket";
 import { Client } from "@/data/types/restaurants";
@@ -85,8 +84,7 @@ export default async function Home() {
         <ClientCard items={open} />
         <h3 className={title({ variant: "disabled" })}>fechados</h3>
         <ClientCard items={closed} variant="disabled" />
-        <LogoCard name={closed[0].name} logo={closed[0].logo} variant="checkout" />
-        <Button buttonType="ghost" buttonColor="success">Criança</Button>
+        {/* <LogoCard name={closed[0]?.name} logo={closed[0]?.logo} variant="checkout" /> */}
         <Ticket items={ticketItems} />
       </div>
     </>

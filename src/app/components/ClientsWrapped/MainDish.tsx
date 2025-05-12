@@ -5,11 +5,19 @@ import Image from "next/image";
 import plus from "@/app/assets/plus.svg";
 import trash from "@/app/assets/trash.svg";
 import minus from "@/app/assets/minus.svg";
+import { useRouter } from 'next/navigation'
 
+interface IMainDish {
+  name: string,
+  description: string,
+  logo: string,
+  restaurantName: string
+}
 
-export const MainDish = () => {
+export const MainDish = ({ name, description, logo, restaurantName }: IMainDish) => {
 
-  const { mainItem, setMainItem, total } = useProductContext();
+  const { mainItem, setMainItem, total, setRestaurantData } = useProductContext();
+  const router = useRouter();
 
   const OnClick = () => {
     const auxMainItem = { ...mainItem };
@@ -17,6 +25,12 @@ export const MainDish = () => {
     auxMainItem.quantity = 1;
 
     setMainItem(auxMainItem);
+    setRestaurantData({
+      name,
+      description,
+      logo,
+      restaurantName
+    });
   }
 
   const ChangeQuantity = (quantity: number) => {
@@ -83,7 +97,7 @@ export const MainDish = () => {
       </div>
       {
         mainItem.quantity >= 1 &&
-        <Button buttonType="solid" buttonColor="primary" className="fixed bottom-4 left-1/10 w-[300px] md:left-1/8 sm:w-[342px]">
+        <Button buttonType="solid" buttonColor="primary" className="fixed bottom-4 left-1/10 w-[300px] md:left-1/8 sm:w-[342px]" onClick={() => router.push("/checkout")}>
           <p className="text-base font-semibold text-content-neutral-white">ver ticket</p>
         </Button>
       }

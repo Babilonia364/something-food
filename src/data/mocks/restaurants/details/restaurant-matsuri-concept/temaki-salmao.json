@@ -1,5 +1,10 @@
 {
   "id": "temaki-salmao",
+  "name": "Temaki Salmão",
+  "description": "Enrolado em forma de cone com alga nori e recheio variado",
+  "image": "https://sabores-new.s3.amazonaws.com/public/2024/11/temaki-de-salmao.jpg",
+  "logo": "https://play-lh.googleusercontent.com/LRl6A3uZGvY_u5lAUyNjKmQHgKVgoBahK39L0UpCbaswaQnpCKA7ABpPcraE3kNvKQ=w240-h480-rw",
+  "restaurantName": "Matsuri Concept",
   "minPrice": 12.9,
   "categories": [
     {

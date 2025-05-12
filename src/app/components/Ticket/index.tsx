@@ -23,7 +23,7 @@ const ticket = tv({
     button: shared().button(),
     sign: shared().sign(),
     itemQuantity: 'font-bold text-sm text-content-neutral-base',
-    category: 'flex flex-col',
+    category: 'flex flex-col mb-3',
     categoryText: 'text-content-neutral-weak text-sm',
     subItemContainer: 'flex justify-between',
     subItemPrice: [
@@ -55,7 +55,7 @@ const ticket = tv({
   }
 });
 
-export const Ticket = ({ items }: { items: TicketItems }) => {
+export const Ticket = ({ items, OnClickEdit }: { items: TicketItems, OnClickEdit: () => void }) => {
   const {
     container,
     item,
@@ -83,7 +83,7 @@ export const Ticket = ({ items }: { items: TicketItems }) => {
         <span className={itemPrice()}>{items.mainItemPrice}</span>
       </div>
       <div className={quantity()}>
-        <Button buttonType="ghost" buttonColor="success" icon={<Image src={pencil} alt="edit icon" className={icon()} />}>editar</Button>
+        <Button buttonType="ghost" buttonColor="success" icon={<Image src={pencil} alt="edit icon" className={icon()} onClick={() => { OnClickEdit() }} />}>editar</Button>
         <div className="flex justify-end w-[1.5rem]">
           {
             currentQuantity > 1 ?
