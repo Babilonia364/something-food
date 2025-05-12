@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import {
   Checkbox as RadixCheckbox,
   CheckboxIndicator as RadixCheckboxIndicator,
@@ -9,6 +10,8 @@ import { tv } from 'tailwind-variants';
 import { shared } from '@/app/styles/shared-styles';
 import { Additional } from '@/data/types/products';
 import { formatBRL } from '@/lib/format';
+import { useProductContext } from '@/app/context/ProductContext';
+import { useCheckbox } from './hooks';
 
 // Defining variants to be easier to implement future features
 const checkbox = tv({
@@ -23,6 +26,9 @@ const checkbox = tv({
       default: {
         checkbox: 'bg-surface-background border-content-neutral-weakest hover:bg-surface-middleground'
       },
+      disabled: {
+        checkbox: 'bg-surface-foreground border-content-neutral-weakest hover:bg-surface-middleground'
+      },
     }
   },
   defaultVariants: {
@@ -30,19 +36,67 @@ const checkbox = tv({
   }
 });
 
-interface IAdditionals {
-  items: Additional[];
+type CheckboxState = {
+  [key: string]: boolean | number,
 }
 
-export const Checkbox = ({ items }: IAdditionals) => {
+interface IAdditionals {
+  items: Additional[];
+  limit?: number;
+  categoryName: string;
+  categoryId: string
+}
+
+export const Checkbox = ({ items, limit, categoryName, categoryId }: IAdditionals) => {
   const { base, item, checkbox: checkboxStyle, label, price } = checkbox();
+  const [checkedObj, setCheckedObj] = useState<CheckboxState>();
+  const { selectedItems, setSelectedItems } = useProductContext();
+  const { addProductToCategory } = useCheckbox();
+
+  const onCheckedChange = (checked: string | boolean, itemId: string, itemName: string) => {
+    const auxArray = { ...checkedObj };
+    const auxSelected = selectedItems || [];
+
+    if (auxArray[itemId] === undefined) {
+      auxArray[itemId] = false
+    }
+    if (auxArray.length === undefined) {
+      auxArray.length = 0;
+    }
+    auxArray[itemId] = (checked === true);
+    let aux = auxArray.length as number;
+    if (checked === true) {
+      aux += 1
+    } else if (checked === false) {
+      aux -= 1;
+    }
+
+    addProductToCategory(auxSelected, categoryId, categoryName, itemId, itemName);
+
+    auxArray.length = aux;
+    setCheckedObj(auxArray);
+    setSelectedItems([...auxSelected]);
+  }
+
+  const isDisabled = (itemId: string) => {
+    if (limit === undefined) return false;
+    if (checkedObj === undefined) return false;
+    const len = checkedObj.length as number;
+
+    return ((len >= limit) && !checkedObj[itemId]);
+  }
 
   return (
     <>
       {items.map((product) => (
         <div className={base()} key={product.id}>
           <div className={item()}>
-            <RadixCheckbox className={checkboxStyle()} id={product.id}>
+            <RadixCheckbox
+              className={checkboxStyle({ state: isDisabled(product.id) ? "disabled" : "default" })}
+              id={product.id}
+              disabled={isDisabled(product.id)}
+              onCheckedChange={(checked) => onCheckedChange(checked, product.id, product.label)}
+            >
               <RadixCheckboxIndicator>
                 <Image src={check} alt="check icon" />
               </RadixCheckboxIndicator>

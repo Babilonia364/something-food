@@ -1,8 +1,6 @@
 import { getRestaurants } from "@/lib/api/mock/restaurants";
 import { Button } from "./components/Button";
 import { ClientCard } from "./components/ClientCard";
-import { ItemControl } from "./components/ItemControl";
-import { RadioGroup } from "./components/RadioGroup";
 import { Ticket } from "./components/Ticket";
 import { Client } from "@/data/types/restaurants";
 import { isRestaurantOpen } from "@/lib/utils/time";
