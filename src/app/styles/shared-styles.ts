@@ -12,7 +12,7 @@ export const shared = tv({
     ],
     sign: [
       'h-full',
-      'leading-none'
+      'flex justify-center items-center'
     ]
   },
   variants: {
