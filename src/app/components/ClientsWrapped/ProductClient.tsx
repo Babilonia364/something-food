@@ -60,7 +60,7 @@ export default function ProductClient({ items }: IProductClient) {
                 ) : item.hasLimit && item.limit && item.limit === 1 ? (
                   <RadioGroup items={item.additionals} categoryName={item.category} categoryId={item.id} mainCategory={item.mainCategory} />
                 ) : (
-                  <ItemControl items={item.additionals} />
+                  <ItemControl items={item.additionals} categoryName={item.category} categoryId={item.id} />
                 )}
               </div>
               <div className={styles.separator()} />

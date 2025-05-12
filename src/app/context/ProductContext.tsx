@@ -128,7 +128,7 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
         auxSelected[existingCategoryIndex].products[existingProductIndex] = {
           id: itemId,
           name: itemName,
-          quantity: auxSelected[existingCategoryIndex].products[existingProductIndex].quantity + newQuantity,
+          quantity: newQuantity,
         };
       } else {
         auxSelected[existingCategoryIndex].products.push({

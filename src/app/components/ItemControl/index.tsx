@@ -68,7 +68,7 @@ export const ItemControl = (itemsArray: Products) => {
                     type="button"
                     name="action"
                     value="decrement"
-                    onClick={() => updateQuantity(item.id, -1)}
+                    onClick={() => updateQuantity(item.id, item.label, -1)}
                     className={button({ variant: currentQuantity <= 0 ? "disabled" : "enabled" })}
                     disabled={currentQuantity <= 0}
                   >
@@ -79,7 +79,7 @@ export const ItemControl = (itemsArray: Products) => {
                     type="button"
                     name="action"
                     value="increment"
-                    onClick={() => updateQuantity(item.id, +1)}
+                    onClick={() => updateQuantity(item.id, item.label, +1)}
                     className={button({ variant: "enabled" })}
                   >
                     <span className={sign()}>+</span>
