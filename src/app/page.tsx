@@ -1,12 +1,10 @@
 import { getRestaurants } from "@/lib/api/mock/restaurants";
 import { ClientCard } from "./components/ClientCard";
-import { Ticket } from "./components/Ticket";
 import { Client } from "@/data/types/restaurants";
 import { isRestaurantOpen } from "@/lib/utils/time";
 import { tv } from "tailwind-variants";
 import Image from "next/image";
 import bannerImage from "@/app/assets/banner.jpg";
-import { LogoCard } from "./components/LogoCard";
 
 const home = tv({
   slots: {
@@ -41,37 +39,6 @@ export default async function Home() {
     }
   });
 
-  const ticketItems = {
-    mainItemId: "ticket-item-ceviche",
-    mainItemName: "Ceviche de salmão",
-    mainItemQuantity: 1,
-    mainItemPrice: "R$ 19,90",
-    observationMessage: "tirar a cebolinha",
-    subItems: [
-      {
-        id: "subitem-tamanho",
-        category: "tamanho",
-        items: [
-          {
-            id: "subitem-item-medio",
-            name: "medio",
-          }
-        ]
-      },
-      {
-        id: "subitem-vai-querer-bebida",
-        category: "vai querer bebida?",
-        items: [
-          {
-            id: "subitem-item-coca-cola",
-            name: "coca-cola",
-            price: "R$5,00",
-          }
-        ]
-      }
-    ]
-  };
-
   return (
     <>
       <Image
@@ -84,8 +51,6 @@ export default async function Home() {
         <ClientCard items={open} />
         <h3 className={title({ variant: "disabled" })}>fechados</h3>
         <ClientCard items={closed} variant="disabled" />
-        {/* <LogoCard name={closed[0]?.name} logo={closed[0]?.logo} variant="checkout" /> */}
-        <Ticket items={ticketItems} />
       </div>
     </>
   );

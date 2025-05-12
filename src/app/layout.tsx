@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`font-nunito antialiased`}
+        className={`font-nunito antialiased h-screen w-full`}
       >
         {children}
       </body>

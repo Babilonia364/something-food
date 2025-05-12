@@ -12,7 +12,7 @@ const ticket = tv({
     container: [
       'flex flex-col',
       'border-b-4 border-content-neutral-border',
-      'py-4'
+      'py-4 px-3'
     ],
     item: 'flex justify-between',
     itemName: 'font-bold text-sm text-content-neutral-strong',
