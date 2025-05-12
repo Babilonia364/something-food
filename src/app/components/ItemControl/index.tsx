@@ -2,6 +2,7 @@
 import { tv } from 'tailwind-variants';
 import { shared } from "@/app/styles/shared-styles";
 import { Products, useControl } from './hooks';
+import { formatBRL } from '@/lib/format';
 
 const itemControl = tv({
   slots: {
@@ -87,7 +88,7 @@ export const ItemControl = (itemsArray: Products) => {
                 <label className={label()}>{item.label}</label>
               </div>
               <input type="hidden" name="productId" value={item.id} />
-              <label className={price()}>{item.price}</label>
+              <label className={price()}>{item.price && formatBRL(item.price)}</label>
             </div>
           )
         })

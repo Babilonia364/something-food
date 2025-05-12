@@ -1,14 +1,9 @@
 'use client';
+import { Additional } from "@/data/types/products";
 import { useState } from "react";
 
-type Product = {
-  id: string;
-  label: string;
-  price: string;
-}
-
 export type Products = {
-  items: Product[];
+  items: Additional[];
 }
 
 type ProductQuantity = {

@@ -1,21 +1,128 @@
 {
   "id": "temaki-salmao",
-  "minPrice": 12.90,
+  "minPrice": 12.9,
   "categories": [
     {
+      "id": "categories-qual-o-tamanho",
       "isMandatory": true,
       "hasLimit": true,
       "category": "qual o tamanho?",
       "limit": 1,
       "additionals": [
         {
+          "id": "additionals-medio",
           "label": "médio",
-          "price": 16.90,
-          "offPrice": 12.90
+          "price": 16.9,
+          "offPrice": 12.9
         },
         {
+          "id": "additionals-grande",
           "label": "grande",
-          "price": 28.90
+          "price": 28.9
+        }
+      ]
+    },
+    {
+      "id": "categories-acompanhamento",
+      "isMandatory": true,
+      "hasLimit": true,
+      "category": "acompanhamento",
+      "limit": 2,
+      "additionals": [
+        {
+          "id": "additionals-shoyu",
+          "label": "shoyu",
+          "price": 4.00
+        },
+        {
+          "id": "additionals-gengibre",
+          "label": "gengibre",
+          "price": 2.50,
+          "isAdditional": true
+        },
+        {
+          "id": "additionals-wasabi",
+          "label": "wasabi"
+        }
+      ]
+    },
+    {
+      "id": "categories-vai-querer-bebida",
+      "category": "vai querer bebida?",
+      "additionals": [
+        {
+          "id": "additionals-coca-cola",
+          "label": "coca-cola",
+          "price": 5.00,
+          "isAdditional": true
+        },
+        {
+          "id": "additionals-fanta-laranja",
+          "label": "fanta laranja",
+          "price": 5.00,
+          "isAdditional": true
+        },
+        {
+          "id": "additionals-guarana-antartica",
+          "label": "guaraná antartica",
+          "price": 5.00,
+          "isAdditional": true
+        },
+        {
+          "id": "additionals-suco-prats-laranja",
+          "label": "suco prats laranja",
+          "price": 6.00,
+          "isAdditional": true
+        },
+        {
+          "id": "additionals-agua-sem-gas",
+          "label": "água sem gás",
+          "price": 3.00,
+          "isAdditional": true
+        }
+      ]
+    },
+    {
+      "id": "categories-precisa-de-talher",
+      "category": "precisa de talher?",
+      "hasLimit": true,
+      "limit": 1,
+      "additionals": [
+        {
+          "id": "additionals-hashi",
+          "label": "hashi"
+        },
+        {
+          "id": "additionals-garfo-e-faca-descartavel",
+          "label": "garfo e faca descartavel",
+          "price": 1.00,
+          "isAdditional": true
+        }
+      ]
+    },
+    {
+      "id": "categories-mais-alguma-coisa",
+      "category": "mais alguma coisa?",
+      "hasLimit": true,
+      "limit": 2,
+      "additionals": [
+        {
+          "id": "additionals-biscoito da sorte",
+          "label": "biscoito da sorte",
+          "price": 2.00,
+          "isAdditional": true
+        },
+        {
+          "id": "additionals-rolinho-primavera",
+          "label": "rolinho primavera",
+          "price": 8.00,
+          "isAdditional": true
+        },
+        {
+          "id": "additionals-guioza",
+          "label": "guioza",
+          "price": 6.00,
+          "isAdditional": true
         }
       ]
     }

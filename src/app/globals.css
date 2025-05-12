@@ -35,6 +35,7 @@
   --color-content-neutral-weak: var(--color-gray-500); /* gray-500 // text-secondary */
   --color-content-neutral-weakest: var(--color-gray-400); /* gray-400 // icons */
   --color-content-neutral-border: var(--color-gray-200); /* gray-200 // containers95 */
+  --color-content-neutral-white: var(--color-white); /* pure-white */
   --color-content-primary: var(--color-primary-500); /* primary-500 // brand */
   --color-content-secondary-strong: var(--color-secondary-600); /* secondary-600 // brand */
   --color-content-secondary-base: var(--color-secondary-400); /* secondary-400 // brand */

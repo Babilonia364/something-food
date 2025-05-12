@@ -7,6 +7,8 @@ import check from '@/app/assets/check.svg';
 import Image from 'next/image';
 import { tv } from 'tailwind-variants';
 import { shared } from '@/app/styles/shared-styles';
+import { Additional } from '@/data/types/products';
+import { formatBRL } from '@/lib/format';
 
 // Defining variants to be easier to implement future features
 const checkbox = tv({
@@ -28,18 +30,11 @@ const checkbox = tv({
   }
 });
 
-interface CheckboxProps {
-  id: string;
-  label: string;
-  price?: string;
-  isAdditional?: boolean;
+interface IAdditionals {
+  items: Additional[];
 }
 
-type Products = {
-  items: CheckboxProps[];
-}
-
-export const Checkbox = ({ items }: Products) => {
+export const Checkbox = ({ items }: IAdditionals) => {
   const { base, item, checkbox: checkboxStyle, label, price } = checkbox();
 
   return (
@@ -58,7 +53,7 @@ export const Checkbox = ({ items }: Products) => {
           </div>
           <label className='flex'>
             {product.isAdditional && <span className={price()}>+</span>}
-            {product.price && <span className={price()}>{product.price}</span>}
+            {product.price && <span className={price()}>{formatBRL(product.price)}</span>}
           </label>
         </div>
       ))}

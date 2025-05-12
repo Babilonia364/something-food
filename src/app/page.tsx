@@ -1,6 +1,5 @@
 import { getRestaurants } from "@/lib/api/mock/restaurants";
 import { Button } from "./components/Button";
-import { Checkbox } from "./components/Checkbox";
 import { ClientCard } from "./components/ClientCard";
 import { ItemControl } from "./components/ItemControl";
 import { RadioGroup } from "./components/RadioGroup";
@@ -45,24 +44,6 @@ export default async function Home() {
     }
   });
 
-  const additionals = [
-    {
-      id: "additionals-shoyu",
-      label: "shoyu",
-      price: "R$ 4,00"
-    },
-    {
-      id: "additionals-gengibre",
-      label: "gengibre",
-      price: "R$ 2,50",
-      isAdditional: true,
-    },
-    {
-      id: "additionals-wasabi",
-      label: "wasabi",
-    },
-  ];
-
   const additionalsChooseOne = [
     {
       id: "additionalschoose-hashi",
@@ -71,20 +52,20 @@ export default async function Home() {
     {
       id: "additionalschoose-garfo-e-faca",
       label: "garfo e faca",
-      price: "R$ 1,00"
+      price: 1.00
     },
     {
       id: "additionalschoose-colher",
       label: "colher",
-      price: "R$ 0,75",
+      price: 0.75,
       isAdditional: true,
     },
     {
       id: "additionalschoose-talher",
       label: "talher",
-      price: "R$ 1,25",
+      price: 1.25,
       isAdditional: true,
-      offPrice: "R$ 1,00",
+      offPrice: 1.00,
     },
   ];
 
@@ -151,7 +132,6 @@ export default async function Home() {
         <ClientCard items={closed} variant="disabled" />
         <LogoCard name={closed[0].name} logo={closed[0].logo} variant="checkout" />
         <Button buttonType="ghost" buttonColor="success">Criança</Button>
-        <Checkbox items={additionals} />
         <RadioGroup items={additionalsChooseOne} />
         <ItemControl items={additionalsChooseMTO} />
         <Ticket items={ticketItems} />

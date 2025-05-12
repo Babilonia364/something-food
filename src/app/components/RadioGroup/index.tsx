@@ -7,6 +7,8 @@ import {
 import Image from "next/image";
 import { tv } from "tailwind-variants";
 import dolarsign from "@/app/assets/dolarsign.svg";
+import { Additional } from "@/data/types/products";
+import { formatBRL } from "@/lib/format";
 
 const radioGroup = tv({
   extend: shared,
@@ -35,19 +37,11 @@ const radioGroup = tv({
   }
 });
 
-type Product = {
-  id: string;
-  label: string;
-  price?: string;
-  isAdditional?: boolean;
-  offPrice?: string;
+interface IAdditionals {
+  items: Additional[];
 };
 
-type Products = {
-  items: Product[];
-};
-
-export const RadioGroup = ({ items }: Products) => {
+export const RadioGroup = ({ items }: IAdditionals) => {
   const {
     container,
     itemContainer,
@@ -85,9 +79,9 @@ export const RadioGroup = ({ items }: Products) => {
             </div>
             
             <div>
-              {hasDiscount && (
+              {hasDiscount && item.price && (
                 <>
-                  <span className={originalPrice()}>de {item.price}</span>
+                  <span className={originalPrice()}>de {formatBRL(item.price)}</span>
                   <span className={offPrice()}> por </span>
                 </>
               )}
@@ -95,7 +89,7 @@ export const RadioGroup = ({ items }: Products) => {
               <span className={price({
                 isAdditional: item.isAdditional
               })}>
-                {hasDiscount ? item.offPrice : item.price}
+                {(hasDiscount && item.offPrice) ? formatBRL(item.offPrice) : (item.price && formatBRL(item.price))}
               </span>
             </div>
           </div>
