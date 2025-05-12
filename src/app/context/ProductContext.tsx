@@ -2,12 +2,14 @@
 'use client';
 
 import { createContext, Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { setCookie, getCookie } from 'cookies-next';
 
 type ChoosenProduct = {
   id: string,
   name: string,
   quantity: number,
-  price: number
+  price: number,
+  offPrice?: number,
 }
 
 type ChoosenProducts = {
@@ -21,6 +23,8 @@ type MainProduct = {
   category: string,
   name: string,
   price: number,
+  realPrice: number,
+  offPrice: number,
   quantity: number
 }
 
@@ -39,9 +43,20 @@ interface IProductContext {
 const ProductContext = createContext<IProductContext | undefined>(undefined);
 
 export function ProductProvider({ children }: { children: React.ReactNode }) {
-  const [selectedItems, setSelectedItems] = useState<ChoosenProducts[]>([]);
-  const [mainItem, setMainItem] = useState<MainProduct>({} as MainProduct);
-  const [total, setTotal] = useState<number>(0);
+  const [selectedItems, setSelectedItems] = useState<ChoosenProducts[]>(() => {
+    const cookieData = getCookie('selectedItems');
+    return cookieData ? JSON.parse(cookieData.toString()) : [];
+  });
+
+  const [mainItem, setMainItem] = useState<MainProduct>(() => {
+    const cookieData = getCookie('mainItem');
+    return cookieData ? JSON.parse(cookieData.toString()) : {} as MainProduct;
+  });
+
+  const [total, setTotal] = useState<number>(() => {
+    const cookieData = getCookie('total');
+    return cookieData ? Number(cookieData) : 0;
+  });
   const addProductToCategory = (
     auxSelected: {
       id: string;
@@ -171,7 +186,7 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
     }[],
     categoryId: string,
     categoryName: string,
-    newProduct: { id: string; name: string; quantity: number, price: number }
+    newProduct: { id: string; name: string; quantity: number, price: number, offPrice: number }
   ) => {
     const categoryIndex = auxSelected.findIndex(cat => cat.id === categoryId);
 
@@ -197,6 +212,21 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const updateCookies = (items: ChoosenProducts[], main: MainProduct, ttl: number) => {
+    setCookie('selectedItems', JSON.stringify(items), {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7, // 1 semana
+    });
+    setCookie('mainItem', JSON.stringify(main), {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    });
+    setCookie('total', ttl.toString(), {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    });
+  };
+
   useEffect(() => {
     const updateTotal = () => {
       let total = 0;
@@ -213,6 +243,10 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
 
     updateTotal();
   }, [selectedItems, mainItem]);
+
+  useEffect(() => {
+    updateCookies(selectedItems, mainItem, total);
+  }, [selectedItems, mainItem, total]);
 
   return (
     <ProductContext.Provider value={{

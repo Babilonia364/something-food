@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Checkbox as RadixCheckbox,
   CheckboxIndicator as RadixCheckboxIndicator,
@@ -35,10 +35,6 @@ const checkbox = tv({
   }
 });
 
-type CheckboxState = {
-  [key: string]: boolean | number,
-}
-
 interface IAdditionals {
   items: Additional[];
   limit?: number;
@@ -48,42 +44,44 @@ interface IAdditionals {
 
 export const Checkbox = ({ items, limit, categoryName, categoryId }: IAdditionals) => {
   const { base, item, checkbox: checkboxStyle, label, price } = checkbox();
-  const [checkedObj, setCheckedObj] = useState<CheckboxState>();
+  const [checkedState, setCheckedState] = useState<Record<string, boolean>>({});
   const { selectedItems, setSelectedItems, addProductToCategory, removeProductFromCategory } = useProductContext();
 
-  const onCheckedChange = (checked: string | boolean, itemId: string, itemName: string, itemPrice?: number) => {
-    const auxArray = { ...checkedObj };
+  useEffect(() => {
+    const initialCheckedState: Record<string, boolean> = {};
+
+    selectedItems?.forEach(category => {
+      category.products.forEach(product => {
+        if(categoryId === category.id) initialCheckedState[product.id] = true;
+      });
+    });
+
+    setCheckedState(initialCheckedState);
+  }, [selectedItems, categoryId]);
+
+  const onCheckedChange = (checked: boolean, itemId: string, itemName: string, itemPrice?: number) => {
     const auxSelected = selectedItems || [];
+    const newCheckedState = { ...checkedState };
 
-    if (auxArray[itemId] === undefined) {
-      auxArray[itemId] = false
-    }
-    if (auxArray.length === undefined) {
-      auxArray.length = 0;
-    }
-    auxArray[itemId] = (checked === true);
-    let aux = auxArray.length as number;
-    if (checked === true) {
-      aux += 1
+    newCheckedState[itemId] = checked;
+    setCheckedState(newCheckedState);
+
+    if (checked) {
       addProductToCategory(auxSelected, categoryId, categoryName, itemId, itemName, itemPrice || 0);
-    } else if (checked === false) {
-      removeProductFromCategory(auxSelected, categoryId, itemId)
-      aux -= 1;
+    } else {
+      removeProductFromCategory(auxSelected, categoryId, itemId);
     }
 
-
-    auxArray.length = aux;
-    setCheckedObj(auxArray);
     setSelectedItems([...auxSelected]);
-  }
+  };
 
   const isDisabled = (itemId: string) => {
     if (limit === undefined) return false;
-    if (checkedObj === undefined) return false;
-    const len = checkedObj.length as number;
 
-    return ((len >= limit) && !checkedObj[itemId]);
-  }
+    const selectedCount = Object.values(checkedState).filter(Boolean).length;
+
+    return selectedCount >= limit && !checkedState[itemId];
+  };
 
   return (
     <>
@@ -94,7 +92,8 @@ export const Checkbox = ({ items, limit, categoryName, categoryId }: IAdditional
               className={checkboxStyle({ state: isDisabled(product.id) ? "disabled" : "default" })}
               id={product.id}
               disabled={isDisabled(product.id)}
-              onCheckedChange={(checked) => onCheckedChange(checked, product.id, product.label, product.price)}
+              onCheckedChange={(checked) => onCheckedChange(checked === true, product.id, product.label, product.price)}
+              checked={checkedState[product.id] || false}
             >
               <RadixCheckboxIndicator>
                 <Image src={check} alt="check icon" />

@@ -66,25 +66,42 @@ export const RadioGroup = ({ items, categoryName, categoryId, mainCategory }: IA
     const itemPrice: number = price !== undefined ? parseFloat(price) : 0;
     const finalPrice: number = itemOffPrice > 0 ? itemOffPrice : itemPrice;
 
-    if(mainCategory) {
-      const auxSelected = mainItem || {id: "", name: "",  category: "", quantity: 0, price: 0};
-      
+    if (mainCategory) {
+      const auxSelected = mainItem || { id: "", name: "", category: "", quantity: 0, price: 0 };
+
       auxSelected.id = id;
       auxSelected.name = label;
       auxSelected.quantity = 0;
       auxSelected.category = categoryName;
       auxSelected.price = finalPrice;
-      
+      auxSelected.realPrice = itemPrice;
+      auxSelected.offPrice = itemOffPrice || 0;
+
       setMainItem({ ...auxSelected });
-    }else {
+    } else {
       const auxSelected = selectedItems || {};
-      replaceFirstProduct(auxSelected, categoryId, categoryName, {id: id, name: label, quantity: 1, price: finalPrice || 0});
+      replaceFirstProduct(auxSelected, categoryId, categoryName, { id: id, name: label, quantity: 1, price: finalPrice || 0, offPrice: itemOffPrice || 0 });
       setSelectedItems([...auxSelected]);
     }
   }
 
+  const DefaultValue = () => {
+    let defaultValue = "";
+    if (mainCategory) {
+      defaultValue = `${mainItem.name}|${mainItem.id}|${mainItem?.realPrice}|${mainItem?.offPrice}`;
+    } else {
+      selectedItems?.forEach(category => {
+        category.products.forEach(product => {
+          if (categoryId === category.id) defaultValue = `${product.name}|${product.id}|${product?.price}|${product?.offPrice}`;
+        });
+      });
+    }
+
+    return defaultValue;
+  };
+
   return (
-    <RadixRadioGroup className={container()} aria-label="View density" onValueChange={OnValueChange}>
+    <RadixRadioGroup className={container()} aria-label="View density" name="casssssa" onValueChange={OnValueChange} value={DefaultValue()}>
       {items.map((item) => {
         const hasDiscount = !!item.offPrice;
 
@@ -92,7 +109,7 @@ export const RadioGroup = ({ items, categoryName, categoryId, mainCategory }: IA
           <div className={itemContainer()} key={item.id}>
             <div className={radioGroupStyle()}>
               <RadixRadioGroupItem
-                value={`${item.label}|${item.id}|${item?.price}|${item?.offPrice}`}
+                value={`${item.label}|${item.id}|${item?.price || 0}|${item?.offPrice || 0}`}
                 className={radioItem()}
                 id={item.id}
               >

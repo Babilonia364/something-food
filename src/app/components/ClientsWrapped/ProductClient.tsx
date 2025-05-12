@@ -6,6 +6,7 @@ import { RadioGroup } from "@/app/components/RadioGroup";
 import { Categories, Product } from "@/data/types/products";
 import { ProductProvider } from "@/app/context/ProductContext";
 import { MainDish } from "./MainDish";
+import { useEffect, useState } from "react";
 
 const productPage = tv({
   slots: {
@@ -38,6 +39,13 @@ interface IProductClient {
 
 export default function ProductClient({ items }: IProductClient) {
   const styles = productPage();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+  }, []);
+
+  if(!loading) return <div>Empty State</div>
 
   return (
     <ProductProvider>
