@@ -5,6 +5,7 @@ import { ItemControl } from "@/app/components/ItemControl";
 import { RadioGroup } from "@/app/components/RadioGroup";
 import { Categories, Product } from "@/data/types/products";
 import { ProductProvider } from "@/app/context/ProductContext";
+import { MainDish } from "./MainDish";
 
 const productPage = tv({
   slots: {
@@ -41,6 +42,7 @@ export default function ProductClient({ items }: IProductClient) {
   return (
     <ProductProvider>
       <div className="flex flex-col">
+        <MainDish />
         {
           items.categories.map((item: Categories) => (
             <div className="pt-4" key={item.id}>

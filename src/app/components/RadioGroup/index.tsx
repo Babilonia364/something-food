@@ -67,7 +67,7 @@ export const RadioGroup = ({ items, categoryName, categoryId, mainCategory }: IA
       
       auxSelected.id = id;
       auxSelected.name = label;
-      auxSelected.quantity = 1;
+      auxSelected.quantity = 0;
       auxSelected.category = categoryName;
       
       setMainItem({ ...auxSelected });
