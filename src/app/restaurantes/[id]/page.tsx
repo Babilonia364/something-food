@@ -25,6 +25,7 @@ export default async function RestaurantPage({ params }: { params: IRestaurantPa
       <Accordion
         items={products}
         collapsible
+        restaurantId={id}
       />
     </div>
   );

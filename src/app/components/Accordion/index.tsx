@@ -11,6 +11,7 @@ import dolarsign from "@/app/assets/dolarsign.svg";
 import { shared } from "@/app/styles/shared-styles";
 import { formatBRL } from "@/lib/format";
 import { ProductItem } from "@/data/types/details";
+import Link from "next/link";
 
 // Defining styles to not overload the component
 const accordion = tv({
@@ -50,6 +51,7 @@ const accordion = tv({
 
 type AccordionProps = {
   items: ProductItem[];
+  restaurantId: string,
   productDescription?: string;
   colorScheme?: "neutral" | "primary";
   type?: "single" | "multiple";
@@ -58,11 +60,17 @@ type AccordionProps = {
 
 export const Accordion = ({
   items,
+  restaurantId,
   colorScheme,
   type = "single",
   collapsible = true,
 }: AccordionProps) => {
   const styles = accordion({ colorScheme });
+
+  const BlockRoute = (route: string) => {
+    if(route === "/restaurantes/restaurant-matsuri-concept/product/temaki-salmao") return route;
+    else return "";
+  }
 
   return (
     //Header
@@ -91,22 +99,24 @@ export const Accordion = ({
         <RadixAccordionContent className={styles.content()}>
           <div className="pt-4 px-4 space-y-3">
             {product.variants.map((variant) => (
-              <div key={variant.id} className={styles.variantItem()}>
-                <div className="flex flex-col">
-                  <span className="text-sm text-content-neutral-strong">{variant.name}</span>
-                  <span className="text-xs text-content-neutral-weak">{variant.description}</span>
+              <Link key={variant.id} href={BlockRoute(`/restaurantes/${restaurantId}/product/${variant.id}`)}>
+                <div className={styles.variantItem()}>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-content-neutral-strong">{variant.name}</span>
+                    <span className="text-xs text-content-neutral-weak">{variant.description}</span>
+                  </div>
+                  <div className="flex flex-col">
+                    {variant.startingPrice && <span className="text-xs text-right text-content-neutral-weak">a partir de</span>}
+                    <span className={`text-right ${variant.offPrice ? styles.offPrice() : styles.price()}`}>{formatBRL(variant.price)}</span>
+                    {variant.offPrice &&
+                      <div className="flex gap-1">
+                        <Image src={dolarsign} alt="price icon" className="w-[12px]" />
+                        <span className="text-sm text-content-success">{formatBRL(variant.offPrice)}</span>
+                      </div>
+                    }
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  {variant.startingPrice && <span className="text-xs text-right text-content-neutral-weak">a partir de</span>}
-                  <span className={`text-right ${variant.offPrice ? styles.offPrice() : styles.price()}`}>{formatBRL(variant.price)}</span>
-                  {variant.offPrice &&
-                    <div className="flex gap-1">
-                      <Image src={dolarsign} alt="price icon" className="w-[12px]" />
-                      <span className="text-sm text-content-success">{formatBRL(variant.offPrice)}</span>
-                    </div>
-                  }
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </RadixAccordionContent>
